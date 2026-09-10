@@ -11,6 +11,19 @@ just open `index.html` in a browser, or serve the folder as a static site.
 - `script.js` — the hero 3D graphic, plus the side scroll-nav logic
   (scroll-spy + progress rail) described below.
 
+## Hero graphic
+
+The animated hero graphic (`initHero3D()` in `script.js`) is a small
+mechatronics-flavored "blueprint": two wireframe gears that actually mesh
+(opposite rotation direction, and the small gear spins faster by the
+inverse of the two gears' tooth-count ratio — the same relationship a
+real gear train has), a ring of wired "sensor/control nodes" standing in
+for the electrical side of the system, and a technical-drawing grid
+behind it all. It reacts to mouse movement for a subtle parallax feel.
+Swap the colors (`BLUEPRINT_CYAN` / `BLUEPRINT_INDIGO` / `BLUEPRINT_PINK`
+near the top of the function) or gear parameters (tooth count, radius) to
+restyle it.
+
 ## Sections
 
 Scrolling down `index.html`, top to bottom:
