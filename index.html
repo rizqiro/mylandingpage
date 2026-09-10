@@ -63,7 +63,8 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero container" id="home">
+<section class="hero-section" id="home">
+<div class="hero container">
   <div class="hero-text">
     <p class="eyebrow">HI, I'M</p>
     <h1 class="hero-name">Abdul Samad</h1>
@@ -109,26 +110,28 @@
   </div>
 
   <div class="hero-visual">
+    <div class="portrait-glow"></div>
+    <div class="portrait">
       <!--
-        Hero image. Swap blueprint.svg for any drawing you like (an .svg,
-        .png or .jpg all work) — nothing else needs to change.
+        Real headshot goes here. Drop the file in next to index.html and
+        point src at it -- the layout, glow, and card below all stay put.
       -->
-      <div class="blueprint">
-        <img src="blueprint.svg" alt="Engineering blueprint of a spur gear: front view, section A-A, tooth detail and title block" class="blueprint-img" />
-      </div>
+      <img src="profile-photo.jpg" alt="Abdul Samad" class="portrait-photo" onerror="this.style.display='none'" />
+    </div>
 
-      <div class="focus-card">
-        <p class="focus-label">FOCUSED ON</p>
-        <ul class="focus-list">
-          <li><svg class="icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="12" cy="12" r="1.6" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 2v3M12 19v3M22 12h-3M5 12H2M19.07 4.93l-2.12 2.12M7.05 16.95l-2.12 2.12M19.07 19.07l-2.12-2.12M7.05 7.05L4.93 4.93" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Mechanical Design (CAD)</li>
-          <li><svg class="icon-sm" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M9 2v3M12 2v3M15 2v3M9 19v3M12 19v3M15 19v3M2 9h3M2 12h3M2 15h3M19 9h3M19 12h3M19 15h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Automation &amp; Controls</li>
-          <li><svg class="icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 13L16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 3h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Process Optimization</li>
-          <li><svg class="icon-sm" viewBox="0 0 24 24"><polygon points="12,3 19,7.5 19,16.5 12,21 5,16.5 5,7.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>Electro-Mechanical Systems</li>
-        </ul>
-      </div>
+    <div class="focus-card">
+      <p class="focus-label">FOCUSED ON</p>
+      <ul class="focus-list">
+        <li><svg class="icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="12" cy="12" r="1.6" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 2v3M12 19v3M22 12h-3M5 12H2M19.07 4.93l-2.12 2.12M7.05 16.95l-2.12 2.12M19.07 19.07l-2.12-2.12M7.05 7.05L4.93 4.93" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Mechanical Design (CAD)</li>
+        <li><svg class="icon-sm" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M9 2v3M12 2v3M15 2v3M9 19v3M12 19v3M15 19v3M2 9h3M2 12h3M2 15h3M19 9h3M19 12h3M19 15h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Automation &amp; Controls</li>
+        <li><svg class="icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 13L16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 3h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Process Optimization</li>
+        <li><svg class="icon-sm" viewBox="0 0 24 24"><polygon points="12,3 19,7.5 19,16.5 12,21 5,16.5 5,7.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>Electro-Mechanical Systems</li>
+      </ul>
+    </div>
 
-      <p class="handwritten">Always learning,<br />always engineering.</p>
+    <p class="handwritten">Always learning,<br />always engineering.</p>
   </div>
+</div>
 </section>
 
 <!-- ABOUT -->
@@ -180,10 +183,7 @@
       </div>
     </div>
 
-    <!-- Drop a real your-photo.jpg next to index.html and it shows here;
-         if the file is missing the decorative panel below shows instead. -->
     <div class="about-image">
-      <img src="your-photo.jpg" alt="Abdul Samad" class="about-photo" onerror="this.remove()" />
       <div class="about-image-lines">
         <span style="width:80%"></span>
         <span style="width:55%"></span>

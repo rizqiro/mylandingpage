@@ -9,48 +9,35 @@ open `index.html` in a browser, or serve the folder as a static site.
 - `index.html` — all page content, in one scrolling document.
 - `styles.css` — all styling.
 - `script.js` — the side scroll-nav logic (scroll-spy + progress rail).
-- `blueprint.svg` — the hero image (see below).
-- `tools/gen_blueprint.py` — optional generator that produced it.
+- `hero-bg.svg` — the faint blueprint-grid texture behind the hero.
 
-## Hero image: the blueprint
+## Hero: photo + blueprint background
 
-The hero visual is a static image — `blueprint.svg` — drawn as a real
-engineering sheet: a spur-gear front view, a sectioned side view
-(SECTION A-A), dimension lines, gear-data / notes / finish blocks and a
-title block, all in the site's navy + sky/indigo palette so it blends
-with the dark theme instead of stock-photo azure. The gear numbers are
-internally consistent (m=10, Z=14: pitch 140, tip 160, face 60), so it
-holds up to an engineer's glance.
+The hero is a two-column intro: your name/tagline/bio on the left, a
+portrait photo on the right (`.portrait` in `index.html`), with a soft
+indigo/cyan glow (`.portrait-glow`) peeking from behind its top-right and
+bottom-left corners, and the "Focused on" card floating over its
+bottom-right corner — all `position: absolute`, so they stay put
+regardless of the photo.
 
-**To change it, swap the file.** In `index.html` the hero is just:
+**To add your photo:** drop a file named `profile-photo.jpg` next to
+`index.html` (any image works; `<img>`'s `onerror` hides it gracefully if
+the file is missing, showing the navy gradient box instead).
 
-```html
-<div class="blueprint">
-  <img src="blueprint.svg" alt="..." class="blueprint-img" />
-</div>
-```
-
-Point that `src` at any `.svg`, `.png` or `.jpg` you like — a photo of a
-real drawing of yours, a CAD export, anything. A 4:5 portrait image fits
-the slot best; other ratios are cropped to fit.
-
-To tweak the supplied drawing instead, either edit `blueprint.svg`
-directly (it's plain SVG — Inkscape, Illustrator or a text editor all
-work), or edit and re-run the optional generator that produced it:
-
-```
-python3 tools/gen_blueprint.py
-```
-
-That's where the part name, material, "DRAWN BY" name, module/teeth and
-colours live, if you'd rather regenerate than hand-edit.
+The whole hero section also has a faint blueprint-grid texture behind it
+(`hero-bg.svg`, set via `.hero-section::before` in `styles.css`) — a large
+ghost gear and grid lines at ~16% opacity, dark-gradiented on top so it
+reads as background grain rather than a competing visual. To use a
+different image instead (a real drawing, a plain gradient, anything),
+just point that `background: url(...)` at a new file — the opacity and
+dark overlay logic don't need to change.
 
 ## Sections
 
 Scrolling down `index.html`, top to bottom:
 
 - **Home** (`id="home"`) — name, tagline, short bio, resume/CTA buttons,
-  social links, the blueprint image and the "Focused on" card.
+  social links, your photo and the "Focused on" card.
 - **About** (`id="about"`) — bio blurb and the four stat cards.
 - **Credentials** (`id="credentials"`) — certifications and credentials,
   see below.
@@ -110,9 +97,6 @@ and `.nav-links` in `index.html` so the new section shows up in both navs.
 
 ## Replacing the placeholder content
 
-- Drop a real `your-photo.jpg` next to `index.html` and it appears in the
-  About section's panel; leave it out and the decorative panel shows
-  instead (the missing image removes itself).
 - Update the name, tagline, bio, stats, and project cards to match your own
   work.
 - Update the social links (`social-btn` anchors) to point to your real
