@@ -1,42 +1,56 @@
 # My Landing Page
 
-A single-page personal portfolio built with plain HTML, CSS, and a bit of
-JavaScript (plus Three.js for the animated hero graphic). No build step —
-just open `index.html` in a browser, or serve the folder as a static site.
+A single-page personal portfolio built with plain HTML, CSS, and a small
+amount of JavaScript. No build step, no framework, no dependencies — just
+open `index.html` in a browser, or serve the folder as a static site.
 
 ## Files
 
 - `index.html` — all page content, in one scrolling document.
 - `styles.css` — all styling.
-- `script.js` — the hero 3D graphic, plus the side scroll-nav logic
-  (scroll-spy + progress rail) described below.
+- `script.js` — the side scroll-nav logic (scroll-spy + progress rail).
+- `blueprint.svg` — the hero image (see below).
+- `tools/gen_blueprint.py` — optional generator that produced it.
 
-## Hero graphic: an interactive gear blueprint
+## Hero image: the blueprint
 
-The hero visual is a real engineering-style technical drawing — a front
-view and a sectioned side view of a gear, with dimension lines, a
-hatched cross-section, and a title block — drawn as plain 2D SVG (no
-WebGL/Three.js, so it works everywhere). It's genuinely parametric: the
-three sliders below it (**Teeth**, **Diameter**, **Bore ⌀**) redraw the
-whole thing live, including the numbers in the title block, via
-`renderBlueprint()`'s `render()` function in `script.js`. The sheet also
-tilts gently toward the cursor for a "drafting table" feel.
+The hero visual is a static image — `blueprint.svg` — drawn as a real
+engineering sheet: a spur-gear front view, a sectioned side view
+(SECTION A-A), dimension lines, gear-data / notes / finish blocks and a
+title block, all in the site's navy + sky/indigo palette so it blends
+with the dark theme instead of stock-photo azure. The gear numbers are
+internally consistent (m=10, Z=14: pitch 140, tip 160, face 60), so it
+holds up to an engineer's glance.
 
-To restyle it, look in `script.js`:
-- Colors, dimension text, and the title block's wording are all inside
-  the SVG template string in `render()`.
-- Slider ranges live on the `<input type="range">` elements in
-  `index.html` (`#ctrlTeeth`, `#ctrlDiameter`, `#ctrlBore`).
-- A small circular photo badge (`.blueprint-photo`, top-right of the
-  drawing) shows `your-photo.jpg` if present, and hides itself
-  gracefully if not.
+**To change it, swap the file.** In `index.html` the hero is just:
+
+```html
+<div class="blueprint">
+  <img src="blueprint.svg" alt="..." class="blueprint-img" />
+</div>
+```
+
+Point that `src` at any `.svg`, `.png` or `.jpg` you like — a photo of a
+real drawing of yours, a CAD export, anything. A 4:5 portrait image fits
+the slot best; other ratios are cropped to fit.
+
+To tweak the supplied drawing instead, either edit `blueprint.svg`
+directly (it's plain SVG — Inkscape, Illustrator or a text editor all
+work), or edit and re-run the optional generator that produced it:
+
+```
+python3 tools/gen_blueprint.py
+```
+
+That's where the part name, material, "DRAWN BY" name, module/teeth and
+colours live, if you'd rather regenerate than hand-edit.
 
 ## Sections
 
 Scrolling down `index.html`, top to bottom:
 
 - **Home** (`id="home"`) — name, tagline, short bio, resume/CTA buttons,
-  social links, and the animated hero graphic.
+  social links, the blueprint image and the "Focused on" card.
 - **About** (`id="about"`) — bio blurb and the four stat cards.
 - **Credentials** (`id="credentials"`) — certifications and credentials,
   see below.
@@ -96,8 +110,9 @@ and `.nav-links` in `index.html` so the new section shows up in both navs.
 
 ## Replacing the placeholder content
 
-- Swap `your-photo.jpg` (referenced in the Hero section) with a real photo,
-  or leave it out — the image quietly hides itself if it fails to load.
+- Drop a real `your-photo.jpg` next to `index.html` and it appears in the
+  About section's panel; leave it out and the decorative panel shows
+  instead (the missing image removes itself).
 - Update the name, tagline, bio, stats, and project cards to match your own
   work.
 - Update the social links (`social-btn` anchors) to point to your real

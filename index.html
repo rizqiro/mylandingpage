@@ -109,10 +109,12 @@
   </div>
 
   <div class="hero-visual">
-    <div class="blueprint-wrap">
-      <div class="blueprint" id="blueprint">
-        <img src="your-photo.jpg" alt="Abdul Samad" class="blueprint-photo" onerror="this.style.display='none'" />
-        <svg id="blueprintSvg" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Interactive gear technical drawing"></svg>
+      <!--
+        Hero image. Swap blueprint.svg for any drawing you like (an .svg,
+        .png or .jpg all work) — nothing else needs to change.
+      -->
+      <div class="blueprint">
+        <img src="blueprint.svg" alt="Engineering blueprint of a spur gear: front view, section A-A, tooth detail and title block" class="blueprint-img" />
       </div>
 
       <div class="focus-card">
@@ -126,32 +128,6 @@
       </div>
 
       <p class="handwritten">Always learning,<br />always engineering.</p>
-    </div>
-
-    <!--
-      Live controls for the blueprint above: dragging these regenerates
-      the SVG drawing (front view + sectioned side view) via
-      renderBlueprint() in script.js — a real parametric technical
-      drawing, not just a picture of one.
-    -->
-    <div class="blueprint-controls">
-      <p class="blueprint-controls-label">PARAMETRIC CONTROLS<span class="cursor">_</span></p>
-      <div class="blueprint-control">
-        <label for="ctrlTeeth">TEETH (Z)</label>
-        <input type="range" id="ctrlTeeth" min="6" max="24" step="1" value="12" />
-        <span class="blueprint-control-value" id="ctrlTeethValue">12</span>
-      </div>
-      <div class="blueprint-control">
-        <label for="ctrlDiameter">DIAMETER</label>
-        <input type="range" id="ctrlDiameter" min="60" max="140" step="2" value="100" />
-        <span class="blueprint-control-value" id="ctrlDiameterValue">100mm</span>
-      </div>
-      <div class="blueprint-control">
-        <label for="ctrlBore">BORE &#8960;</label>
-        <input type="range" id="ctrlBore" min="10" max="40" step="2" value="24" />
-        <span class="blueprint-control-value" id="ctrlBoreValue">24mm</span>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -204,7 +180,10 @@
       </div>
     </div>
 
+    <!-- Drop a real your-photo.jpg next to index.html and it shows here;
+         if the file is missing the decorative panel below shows instead. -->
     <div class="about-image">
+      <img src="your-photo.jpg" alt="Abdul Samad" class="about-photo" onerror="this.remove()" />
       <div class="about-image-lines">
         <span style="width:80%"></span>
         <span style="width:55%"></span>
