@@ -6,11 +6,16 @@
 --------------------------------------------------------- */
 function initScrollNav() {
   const sections = document.querySelectorAll("section[id]");
+  const scrollNavEl = document.querySelector(".scroll-nav");
   const scrollNavItems = document.querySelectorAll(".scroll-nav-item");
   const topNavLinks = document.querySelectorAll(".nav-link");
   const progressEl = document.getElementById("scrollProgress");
   if (!sections.length) return;
 
+  // Each section can opt into a light background via data-theme="light"
+  // (see the About section). The side nav reads that and swaps its own
+  // colors so it stays readable over both light and dark sections,
+  // instead of a single hardcoded color that only works on dark ones.
   const setActive = (id) => {
     scrollNavItems.forEach((item) => {
       item.classList.toggle("active", item.dataset.section === id);
@@ -18,6 +23,11 @@ function initScrollNav() {
     topNavLinks.forEach((link) => {
       link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
     });
+    if (scrollNavEl) {
+      const section = document.getElementById(id);
+      const theme = (section && section.dataset.theme) || "dark";
+      scrollNavEl.classList.toggle("on-light", theme === "light");
+    }
   };
 
   if ("IntersectionObserver" in window) {

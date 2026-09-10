@@ -40,6 +40,11 @@ A fixed vertical HUD on the right edge of the screen (`.scroll-nav` in
   that lights up — with a blinking terminal cursor — when its section is
   active or hovered.
 - The same active state is mirrored on the top navbar links.
+- The nav's colors are theme-aware, not fixed: a section can opt into a
+  light background with `data-theme="light"` (see the About section),
+  and `initScrollNav()` toggles `.on-light` on `.scroll-nav` as that
+  section comes into view, swapping in dark-on-light colors so the nav
+  stays readable instead of disappearing over a white background.
 
 It's built with an `IntersectionObserver`, so no scroll-jank polling. It
 hides below ~900px width to keep mobile layouts uncluttered (the top nav

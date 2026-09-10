@@ -889,6 +889,7 @@ body {
   text-decoration: none;
   color: var(--zinc-500);
   white-space: nowrap;
+  transition: color 0.25s ease;
 }
 
 .scroll-nav-num {
@@ -960,6 +961,51 @@ body {
 @keyframes cursor-blink {
   0%, 49% { opacity: 1; }
   50%, 100% { opacity: 0; }
+}
+
+/*
+  Dynamic theme: sections opt into a light background via
+  data-theme="light" (see the About section). initScrollNav() in
+  script.js reads that and adds/removes .on-light on .scroll-nav as the
+  visitor scrolls, so the nav swaps to dark-on-light colors instead of
+  staying a fixed color that disappears over a white section.
+*/
+.scroll-nav.on-light .scroll-nav-rail {
+  background: var(--zinc-300);
+}
+
+.scroll-nav.on-light .scroll-nav-progress {
+  background: linear-gradient(180deg, var(--indigo), var(--indigo-light));
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.45);
+}
+
+.scroll-nav.on-light .scroll-nav-item {
+  color: var(--zinc-500);
+}
+
+.scroll-nav.on-light .scroll-nav-item.active {
+  color: var(--zinc-900);
+}
+
+.scroll-nav.on-light .scroll-nav-item:hover .scroll-nav-num,
+.scroll-nav.on-light .scroll-nav-item.active .scroll-nav-num,
+.scroll-nav.on-light .cursor {
+  color: var(--indigo);
+}
+
+.scroll-nav.on-light .scroll-nav-dot {
+  background: #fff;
+  border-color: var(--zinc-400);
+}
+
+.scroll-nav.on-light .scroll-nav-item:hover .scroll-nav-dot {
+  border-color: var(--zinc-600);
+}
+
+.scroll-nav.on-light .scroll-nav-item.active .scroll-nav-dot {
+  background: var(--indigo);
+  border-color: var(--indigo);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15), 0 0 10px rgba(99, 102, 241, 0.55);
 }
 
 @media (max-width: 900px) {
