@@ -348,16 +348,17 @@ body {
   .handwritten { display: block; }
 }
 
-/* Page header (used at the top of non-Home pages) */
+/* Page header (used above the Contact section) */
 .page-header {
-  padding: 24px 24px 8px;
+  padding: 64px 24px 8px;
   text-align: center;
 }
 .page-header .eyebrow {
   justify-content: center;
   display: flex;
 }
-.page-header h1 {
+.page-header h1,
+.page-header h2 {
   font-size: clamp(32px, 5vw, 48px);
   font-weight: 800;
   margin-bottom: 12px;
@@ -657,36 +658,6 @@ body {
   margin-bottom: 16px;
 }
 
-.link-arrow {
-  color: var(--indigo-light);
-  font-size: 14px;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: gap 0.2s ease;
-}
-.link-arrow:hover {
-  gap: 10px;
-}
-
-.round-btn {
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  border: 1px solid var(--zinc-700);
-  background: transparent;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-.round-btn:hover {
-  background: var(--zinc-900);
-}
-
 .project-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -846,75 +817,6 @@ body {
   max-width: 380px;
 }
 
-/* CTA */
-.cta-wrap {
-  padding: 0 24px 64px;
-}
-
-.cta {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(120deg, #4f46e5, #7c3aed);
-  border-radius: 28px;
-  padding: 40px 48px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-
-.cta-ring {
-  position: absolute;
-  left: -40px;
-  bottom: -40px;
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-
-.cta-left {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  position: relative;
-  z-index: 1;
-}
-
-.cta-icon {
-  height: 56px;
-  width: 56px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.cta-icon .icon {
-  width: 22px;
-  height: 22px;
-}
-
-.cta-title {
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-
-.cta-desc {
-  color: #e0e7ff;
-  font-size: 14px;
-  max-width: 420px;
-}
-
-.cta .btn-dark {
-  position: relative;
-  z-index: 1;
-  flex-shrink: 0;
-}
-
 /* Footer */
 .footer {
   border-top: 1px solid var(--zinc-900);
@@ -933,4 +835,133 @@ body {
 
 .heart {
   color: #ef4444;
+}
+
+/* ---------------------------------------------------------
+   Techie side scroll nav
+   Fixed vertical HUD on the right edge of the viewport that
+   tracks scroll position: a glowing progress rail plus a
+   monospace index/label per section, terminal-style.
+--------------------------------------------------------- */
+.scroll-nav {
+  position: fixed;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 200;
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.scroll-nav-rail {
+  position: relative;
+  width: 2px;
+  border-radius: 999px;
+  background: var(--zinc-800);
+  overflow: hidden;
+}
+
+.scroll-nav-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: linear-gradient(180deg, var(--sky), var(--indigo-light));
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
+  transition: height 0.1s linear;
+}
+
+.scroll-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.scroll-nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--zinc-500);
+  white-space: nowrap;
+}
+
+.scroll-nav-num {
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  opacity: 0.55;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.scroll-nav-label {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  transform: translateX(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease, max-width 0.2s ease;
+}
+
+.scroll-nav-item .cursor {
+  color: var(--sky);
+  opacity: 0;
+  animation: cursor-blink 1s steps(1) infinite;
+}
+
+.scroll-nav-item:hover .scroll-nav-label,
+.scroll-nav-item.active .scroll-nav-label {
+  opacity: 1;
+  max-width: 140px;
+  transform: translateX(0);
+}
+
+.scroll-nav-item:hover .cursor,
+.scroll-nav-item.active .cursor {
+  opacity: 1;
+}
+
+.scroll-nav-item:hover .scroll-nav-num,
+.scroll-nav-item.active .scroll-nav-num {
+  color: var(--sky);
+  opacity: 1;
+}
+
+.scroll-nav-item.active {
+  color: #fff;
+}
+
+.scroll-nav-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--zinc-950);
+  border: 1px solid var(--zinc-600);
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+
+.scroll-nav-item:hover .scroll-nav-dot {
+  border-color: var(--zinc-300);
+}
+
+.scroll-nav-item.active .scroll-nav-dot {
+  background: var(--sky);
+  border-color: var(--sky);
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15), 0 0 12px rgba(56, 189, 248, 0.7);
+}
+
+@keyframes cursor-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@media (max-width: 900px) {
+  .scroll-nav { display: none; }
 }

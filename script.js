@@ -1,4 +1,56 @@
 /* ---------------------------------------------------------
+   Techie side scroll nav
+   Highlights the section currently in view (both the fixed
+   side HUD and the top navbar links) and fills the glowing
+   progress rail based on overall scroll position.
+--------------------------------------------------------- */
+function initScrollNav() {
+  const sections = document.querySelectorAll("section[id]");
+  const scrollNavItems = document.querySelectorAll(".scroll-nav-item");
+  const topNavLinks = document.querySelectorAll(".nav-link");
+  const progressEl = document.getElementById("scrollProgress");
+  if (!sections.length) return;
+
+  const setActive = (id) => {
+    scrollNavItems.forEach((item) => {
+      item.classList.toggle("active", item.dataset.section === id);
+    });
+    topNavLinks.forEach((link) => {
+      link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
+    });
+  };
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+    );
+    sections.forEach((section) => observer.observe(section));
+  }
+
+  const updateProgress = () => {
+    if (!progressEl) return;
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0;
+    progressEl.style.height = `${pct}%`;
+  };
+
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  window.addEventListener("resize", updateProgress);
+  updateProgress();
+
+  // Mark Home active by default before any scrolling/observer callback fires.
+  setActive(sections[0].id);
+}
+
+document.addEventListener("DOMContentLoaded", initScrollNav);
+
+/* ---------------------------------------------------------
    Hero 3D animation (Three.js)
    A rotating wireframe icosahedron with a glowing core and
    a scattering of particles, sitting in the hero photo slot.
