@@ -61,257 +61,157 @@ function initScrollNav() {
 document.addEventListener("DOMContentLoaded", initScrollNav);
 
 /* ---------------------------------------------------------
-   Hero 3D animation (Three.js)
-   A mechanical/electrical "blueprint": two wireframe gears
-   actually meshing (opposite rotation, speed ratio matches
-   their tooth count, like a real gear train), a small ring of
-   wired control nodes standing in for the electrical/sensing
-   side of a mechatronic system, and a technical-drawing grid
-   behind it all. Reacts gently to the mouse for parallax.
-   Only runs on pages that have a #hero-3d canvas (Home).
+   Interactive gear blueprint (plain 2D SVG, no WebGL)
+   A parametric technical drawing — a front view and a
+   sectioned side view of a gear, dimension lines, hatching,
+   and a title block — redrawn live as the visitor drags the
+   Teeth / Diameter / Bore sliders. The sheet also tilts
+   gently toward the cursor, like a drawing on a drafting
+   table. Only runs on pages with a #blueprintSvg (Home).
 --------------------------------------------------------- */
-function initHero3D() {
-  const canvas = document.getElementById("hero-3d");
-  if (!canvas || typeof THREE === "undefined") return;
+function initBlueprint() {
+  const svg = document.getElementById("blueprintSvg");
+  const sheet = document.getElementById("blueprint");
+  const teethInput = document.getElementById("ctrlTeeth");
+  const diameterInput = document.getElementById("ctrlDiameter");
+  const boreInput = document.getElementById("ctrlBore");
+  if (!svg || !sheet || !teethInput || !diameterInput || !boreInput) return;
 
-  const container = canvas.parentElement;
-  let width = container.clientWidth;
-  let height = container.clientHeight;
+  const teethValueEl = document.getElementById("ctrlTeethValue");
+  const diameterValueEl = document.getElementById("ctrlDiameterValue");
+  const boreValueEl = document.getElementById("ctrlBoreValue");
 
-  const scene = new THREE.Scene();
-
-  const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-  camera.position.z = 7;
-
-  const renderer = new THREE.WebGLRenderer({
-    canvas,
-    alpha: true,
-    antialias: true,
-  });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(width, height);
-
-  const BLUEPRINT_CYAN = 0x38bdf8;
-  const BLUEPRINT_INDIGO = 0x818cf8;
-  const BLUEPRINT_PINK = 0xe879f9;
-
-  // ---- Blueprint grid backdrop, drawn onto a canvas texture ----
-  function makeGridTexture() {
-    const size = 512;
-    const c = document.createElement("canvas");
-    c.width = size;
-    c.height = size;
-    const ctx = c.getContext("2d");
-
-    ctx.strokeStyle = "rgba(56, 189, 248, 0.3)";
-    ctx.lineWidth = 1;
-    const step = size / 16;
-    for (let i = 0; i <= 16; i++) {
-      ctx.beginPath();
-      ctx.moveTo(i * step, 0);
-      ctx.lineTo(i * step, size);
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(0, i * step);
-      ctx.lineTo(size, i * step);
-      ctx.stroke();
-    }
-
-    ctx.strokeStyle = "rgba(56, 189, 248, 0.65)";
-    ctx.lineWidth = 1.5;
-    const bigStep = size / 4;
-    for (let i = 0; i <= 4; i++) {
-      ctx.beginPath();
-      ctx.moveTo(i * bigStep, 0);
-      ctx.lineTo(i * bigStep, size);
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(0, i * bigStep);
-      ctx.lineTo(size, i * bigStep);
-      ctx.stroke();
-    }
-
-    return new THREE.CanvasTexture(c);
-  }
-
-  const gridPlane = new THREE.Mesh(
-    new THREE.PlaneGeometry(10, 10),
-    new THREE.MeshBasicMaterial({
-      map: makeGridTexture(),
-      transparent: true,
-      opacity: 0.45,
-      depthWrite: false,
-    })
-  );
-  gridPlane.position.z = -2.4;
-  scene.add(gridPlane);
-
-  // ---- Gear geometry: a real involute-ish gear outline (teeth as a
-  // zig-zag between an outer and root radius) with a bore hole ----
-  function createGearShape(teeth, outerRadius, innerRadius, toothDepth) {
-    const shape = new THREE.Shape();
+  // Outline of a gear (teeth as a zig-zag between an outer and root
+  // radius), as an SVG path, centered at (cx, cy).
+  function gearOutlinePath(cx, cy, teeth, outerR, toothDepth) {
+    const pts = [];
     const step = (Math.PI * 2) / (teeth * 2);
     for (let i = 0; i <= teeth * 2; i++) {
-      const angle = i * step;
-      const r = i % 2 === 0 ? outerRadius : outerRadius - toothDepth;
-      const x = Math.cos(angle) * r;
-      const y = Math.sin(angle) * r;
-      if (i === 0) shape.moveTo(x, y);
-      else shape.lineTo(x, y);
+      const r = i % 2 === 0 ? outerR : outerR - toothDepth;
+      const a = i * step - Math.PI / 2;
+      pts.push(
+        `${(cx + Math.cos(a) * r).toFixed(1)},${(cy + Math.sin(a) * r).toFixed(1)}`
+      );
     }
-    shape.closePath();
-
-    const bore = new THREE.Path();
-    bore.absarc(0, 0, innerRadius, 0, Math.PI * 2, true);
-    shape.holes.push(bore);
-    return shape;
+    return `M${pts.join(" L")} Z`;
   }
 
-  function createGear(teeth, outerRadius, innerRadius, toothDepth, depth, color) {
-    const shape = createGearShape(teeth, outerRadius, innerRadius, toothDepth);
-    const geo = new THREE.ExtrudeGeometry(shape, {
-      depth,
-      bevelEnabled: false,
-      curveSegments: 12,
-    });
-    const mat = new THREE.MeshBasicMaterial({
-      color,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.85,
-    });
-    return new THREE.Mesh(geo, mat);
+  // A zig-zag "tooth profile" line across a fixed width, for the
+  // sectioned side view.
+  function toothProfilePoints(x0, x1, yBase, toothHeight, teeth) {
+    const n = Math.max(3, Math.min(teeth, 10));
+    const step = (x1 - x0) / (n * 2);
+    const pts = [];
+    for (let i = 0; i <= n * 2; i++) {
+      const x = x0 + i * step;
+      const y = i % 2 === 0 ? yBase : yBase - toothHeight;
+      pts.push(`${x.toFixed(1)},${y.toFixed(1)}`);
+    }
+    return pts;
   }
 
-  const rig = new THREE.Group();
-  scene.add(rig);
+  function render() {
+    const teeth = parseInt(teethInput.value, 10);
+    const diameter = parseInt(diameterInput.value, 10);
+    const bore = parseInt(boreInput.value, 10);
 
-  const BIG_TEETH = 20;
-  const SMALL_TEETH = 11;
+    if (teethValueEl) teethValueEl.textContent = teeth;
+    if (diameterValueEl) diameterValueEl.textContent = `${diameter}mm`;
+    if (boreValueEl) boreValueEl.textContent = `${bore}mm`;
 
-  const bigGear = createGear(BIG_TEETH, 1.7, 0.55, 0.22, 0.3, BLUEPRINT_CYAN);
-  bigGear.position.set(-0.85, 0, 0);
-  rig.add(bigGear);
+    // --- Front view (right side of the sheet): a full gear face ---
+    const cx = 290;
+    const cy = 185;
+    const outerR = 55 + ((diameter - 60) / 80) * 40;
+    const toothDepth = outerR * 0.22;
+    const boreR = 10 + ((bore - 10) / 30) * 22;
+    const gearPath = gearOutlinePath(cx, cy, teeth, outerR, toothDepth);
 
-  const smallGear = createGear(SMALL_TEETH, 1.0, 0.32, 0.18, 0.3, BLUEPRINT_INDIGO);
-  smallGear.position.set(1.55, 0, 0.05);
-  rig.add(smallGear);
+    // --- Side / sectional view (left side): tooth profile + shaft ---
+    const sx0 = 45;
+    const sx1 = 175;
+    const yBase = 150;
+    const toothHeightSide = 22 + ((diameter - 60) / 80) * 16;
+    const shaftHalfWidth = 18 + boreR * 0.55;
+    const shaftTop = yBase + 6;
+    const shaftBottom = 300;
+    const midX = (sx0 + sx1) / 2;
 
-  // Shafts through each gear's bore, perpendicular to the gear faces
-  function addShaft(x, len, color) {
-    const geo = new THREE.CylinderGeometry(0.05, 0.05, len, 12);
-    const mat = new THREE.MeshBasicMaterial({
-      color,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.6,
-    });
-    const shaft = new THREE.Mesh(geo, mat);
-    shaft.rotation.x = Math.PI / 2;
-    shaft.position.set(x, 0, 0);
-    rig.add(shaft);
+    const topPts = toothProfilePoints(sx0, sx1, yBase, toothHeightSide, teeth);
+    const blockPath =
+      `M${topPts.join(" L")} ` +
+      `L${sx1.toFixed(1)},${shaftTop} ` +
+      `L${(midX + shaftHalfWidth).toFixed(1)},${shaftTop} ` +
+      `L${(midX + shaftHalfWidth).toFixed(1)},${shaftBottom} ` +
+      `L${(midX - shaftHalfWidth).toFixed(1)},${shaftBottom} ` +
+      `L${(midX - shaftHalfWidth).toFixed(1)},${shaftTop} ` +
+      `L${sx0.toFixed(1)},${shaftTop} Z`;
+
+    svg.innerHTML = `
+      <defs>
+        <pattern id="hatch" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(45)">
+          <line x1="0" y1="0" x2="0" y2="7" stroke="rgba(255,255,255,0.45)" stroke-width="1" />
+        </pattern>
+      </defs>
+
+      <rect x="0" y="0" width="400" height="500" fill="#123a5e" />
+      <rect x="14" y="14" width="372" height="472" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.5" />
+
+      <circle cx="55" cy="435" r="95" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="1.5" />
+      <circle cx="55" cy="435" r="62" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="1.5" />
+
+      <g stroke="rgba(255,255,255,0.5)" stroke-width="1.2" fill="none">
+        <rect x="350" y="26" width="10" height="10" />
+        <path d="M326 34 l6 6 14 -16" />
+      </g>
+
+      <path d="${blockPath}" fill="url(#hatch)" stroke="rgba(255,255,255,0.9)" stroke-width="1.4" stroke-linejoin="round" />
+
+      <g stroke="rgba(255,255,255,0.55)" stroke-width="1">
+        <line x1="${sx0}" y1="330" x2="${sx1}" y2="330" />
+        <line x1="${sx0}" y1="324" x2="${sx0}" y2="336" />
+        <line x1="${sx1}" y1="324" x2="${sx1}" y2="336" />
+      </g>
+      <text x="${midX.toFixed(1)}" y="346" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" fill="rgba(255,255,255,0.8)">Z = ${teeth} TEETH</text>
+
+      <path d="${gearPath}" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.4" stroke-linejoin="round" />
+      <circle cx="${cx}" cy="${cy}" r="${boreR.toFixed(1)}" fill="#123a5e" stroke="rgba(255,255,255,0.9)" stroke-width="1.4" />
+      <rect x="${(cx - 4).toFixed(1)}" y="${(cy - boreR - 8).toFixed(1)}" width="8" height="12" fill="#123a5e" stroke="rgba(255,255,255,0.9)" stroke-width="1.2" />
+
+      <g stroke="rgba(255,255,255,0.55)" stroke-width="1">
+        <line x1="${(cx - outerR).toFixed(1)}" y1="${(cy + outerR + 20).toFixed(1)}" x2="${(cx + outerR).toFixed(1)}" y2="${(cy + outerR + 20).toFixed(1)}" />
+        <line x1="${(cx - outerR).toFixed(1)}" y1="${(cy + outerR + 14).toFixed(1)}" x2="${(cx - outerR).toFixed(1)}" y2="${(cy + outerR + 26).toFixed(1)}" />
+        <line x1="${(cx + outerR).toFixed(1)}" y1="${(cy + outerR + 14).toFixed(1)}" x2="${(cx + outerR).toFixed(1)}" y2="${(cy + outerR + 26).toFixed(1)}" />
+      </g>
+      <text x="${cx.toFixed(1)}" y="${(cy + outerR + 40).toFixed(1)}" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" fill="rgba(255,255,255,0.8)">&#8960; ${diameter}mm</text>
+      <text x="${cx.toFixed(1)}" y="${(cy + outerR + 56).toFixed(1)}" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="rgba(255,255,255,0.6)">&#8960; ${bore}mm bore</text>
+
+      <g font-family="'JetBrains Mono', monospace" fill="rgba(255,255,255,0.85)">
+        <rect x="230" y="404" width="156" height="66" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1" />
+        <line x1="230" y1="426" x2="386" y2="426" stroke="rgba(255,255,255,0.35)" stroke-width="1" />
+        <line x1="230" y1="448" x2="386" y2="448" stroke="rgba(255,255,255,0.35)" stroke-width="1" />
+        <text x="238" y="418" font-size="9" letter-spacing="1" fill="rgba(255,255,255,0.6)">TECHNICAL DRAWING</text>
+        <text x="238" y="440" font-size="11" font-weight="600">GEAR &#183; Z${teeth} / &#8960;${diameter}</text>
+        <text x="238" y="462" font-size="9" letter-spacing="1" fill="rgba(255,255,255,0.6)">MECHATRONICS PORTFOLIO</text>
+      </g>
+    `;
   }
-  addShaft(-0.85, 1.1, BLUEPRINT_CYAN);
-  addShaft(1.55, 0.9, BLUEPRINT_INDIGO);
 
-  // ---- Electrical/control side: sensor nodes wired back to the rig ----
-  const nodeGroup = new THREE.Group();
-  scene.add(nodeGroup);
-
-  const nodeCount = 6;
-  const nodeRadius = 3;
-  const nodeGeo = new THREE.OctahedronGeometry(0.12, 0);
-  const nodeMat = new THREE.MeshBasicMaterial({
-    color: BLUEPRINT_PINK,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.9,
+  [teethInput, diameterInput, boreInput].forEach((input) => {
+    input.addEventListener("input", render);
   });
-  const wireMat = new THREE.LineBasicMaterial({
-    color: BLUEPRINT_PINK,
-    transparent: true,
-    opacity: 0.3,
+  render();
+
+  // Gentle tilt toward the cursor, like a drawing on a drafting table.
+  sheet.addEventListener("mousemove", (e) => {
+    const rect = sheet.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    sheet.style.transform = `perspective(700px) rotateX(${(-py * 6).toFixed(2)}deg) rotateY(${(px * 8).toFixed(2)}deg)`;
   });
-
-  for (let i = 0; i < nodeCount; i++) {
-    const angle = (i / nodeCount) * Math.PI * 2;
-    const x = Math.cos(angle) * nodeRadius;
-    const y = Math.sin(angle) * nodeRadius * 0.6;
-    const z = Math.sin(angle * 2) * 0.6;
-
-    const node = new THREE.Mesh(nodeGeo, nodeMat);
-    node.position.set(x, y, z);
-    nodeGroup.add(node);
-
-    const wireGeo = new THREE.BufferGeometry().setFromPoints([
-      new THREE.Vector3(0, 0, 0),
-      new THREE.Vector3(x, y, z),
-    ]);
-    nodeGroup.add(new THREE.Line(wireGeo, wireMat));
-  }
-
-  // ---- Reference/dimension points scattered around the assembly ----
-  const particleCount = 90;
-  const positions = new Float32Array(particleCount * 3);
-  for (let i = 0; i < particleCount; i++) {
-    const r = 3.6 + Math.random() * 1.6;
-    const theta = Math.random() * Math.PI * 2;
-    const phi = Math.acos(2 * Math.random() - 1);
-    positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-    positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-    positions[i * 3 + 2] = r * Math.cos(phi) * 0.4;
-  }
-  const particlesGeo = new THREE.BufferGeometry();
-  particlesGeo.setAttribute(
-    "position",
-    new THREE.BufferAttribute(positions, 3)
-  );
-  const particlesMat = new THREE.PointsMaterial({
-    color: 0xa5b4fc,
-    size: 0.03,
-    transparent: true,
-    opacity: 0.6,
-  });
-  const particles = new THREE.Points(particlesGeo, particlesMat);
-  scene.add(particles);
-
-  // Gentle mouse parallax
-  let targetX = 0;
-  let targetY = 0;
-  window.addEventListener("mousemove", (e) => {
-    targetX = (e.clientX / window.innerWidth - 0.5) * 0.5;
-    targetY = (e.clientY / window.innerHeight - 0.5) * 0.35;
-  });
-
-  function animate() {
-    requestAnimationFrame(animate);
-
-    // The two gears actually mesh: opposite rotation direction, and the
-    // small gear spins faster by the inverse of the big/small tooth
-    // ratio — the same relationship a real gear train has.
-    bigGear.rotation.z += 0.006;
-    smallGear.rotation.z -= 0.006 * (BIG_TEETH / SMALL_TEETH);
-
-    nodeGroup.rotation.z -= 0.0015;
-    particles.rotation.y += 0.0008;
-
-    rig.rotation.y += (targetX - rig.rotation.y) * 0.02;
-    rig.rotation.x += (targetY - rig.rotation.x) * 0.02;
-    nodeGroup.rotation.y = rig.rotation.y;
-    nodeGroup.rotation.x = rig.rotation.x;
-    gridPlane.rotation.y = rig.rotation.y * 0.3;
-
-    renderer.render(scene, camera);
-  }
-  animate();
-
-  window.addEventListener("resize", () => {
-    width = container.clientWidth;
-    height = container.clientHeight;
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
+  sheet.addEventListener("mouseleave", () => {
+    sheet.style.transform = "perspective(700px) rotateX(0deg) rotateY(0deg)";
   });
 }
 
-document.addEventListener("DOMContentLoaded", initHero3D);
+document.addEventListener("DOMContentLoaded", initBlueprint);

@@ -11,18 +11,25 @@ just open `index.html` in a browser, or serve the folder as a static site.
 - `script.js` — the hero 3D graphic, plus the side scroll-nav logic
   (scroll-spy + progress rail) described below.
 
-## Hero graphic
+## Hero graphic: an interactive gear blueprint
 
-The animated hero graphic (`initHero3D()` in `script.js`) is a small
-mechatronics-flavored "blueprint": two wireframe gears that actually mesh
-(opposite rotation direction, and the small gear spins faster by the
-inverse of the two gears' tooth-count ratio — the same relationship a
-real gear train has), a ring of wired "sensor/control nodes" standing in
-for the electrical side of the system, and a technical-drawing grid
-behind it all. It reacts to mouse movement for a subtle parallax feel.
-Swap the colors (`BLUEPRINT_CYAN` / `BLUEPRINT_INDIGO` / `BLUEPRINT_PINK`
-near the top of the function) or gear parameters (tooth count, radius) to
-restyle it.
+The hero visual is a real engineering-style technical drawing — a front
+view and a sectioned side view of a gear, with dimension lines, a
+hatched cross-section, and a title block — drawn as plain 2D SVG (no
+WebGL/Three.js, so it works everywhere). It's genuinely parametric: the
+three sliders below it (**Teeth**, **Diameter**, **Bore ⌀**) redraw the
+whole thing live, including the numbers in the title block, via
+`renderBlueprint()`'s `render()` function in `script.js`. The sheet also
+tilts gently toward the cursor for a "drafting table" feel.
+
+To restyle it, look in `script.js`:
+- Colors, dimension text, and the title block's wording are all inside
+  the SVG template string in `render()`.
+- Slider ranges live on the `<input type="range">` elements in
+  `index.html` (`#ctrlTeeth`, `#ctrlDiameter`, `#ctrlBore`).
+- A small circular photo badge (`.blueprint-photo`, top-right of the
+  drawing) shows `your-photo.jpg` if present, and hides itself
+  gracefully if not.
 
 ## Sections
 

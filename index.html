@@ -7,7 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Caveat:wght@500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 
@@ -110,23 +109,49 @@
   </div>
 
   <div class="hero-visual">
-    <div class="portrait">
-      <div class="portrait-glow"></div>
-      <canvas id="hero-3d"></canvas>
-      <img src="your-photo.jpg" alt="Abdul Samad" class="portrait-photo" onerror="this.style.display='none'" />
+    <div class="blueprint-wrap">
+      <div class="blueprint" id="blueprint">
+        <img src="your-photo.jpg" alt="Abdul Samad" class="blueprint-photo" onerror="this.style.display='none'" />
+        <svg id="blueprintSvg" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Interactive gear technical drawing"></svg>
+      </div>
+
+      <div class="focus-card">
+        <p class="focus-label">FOCUSED ON</p>
+        <ul class="focus-list">
+          <li><svg class="icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="12" cy="12" r="1.6" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 2v3M12 19v3M22 12h-3M5 12H2M19.07 4.93l-2.12 2.12M7.05 16.95l-2.12 2.12M19.07 19.07l-2.12-2.12M7.05 7.05L4.93 4.93" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Mechanical Design (CAD)</li>
+          <li><svg class="icon-sm" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M9 2v3M12 2v3M15 2v3M9 19v3M12 19v3M15 19v3M2 9h3M2 12h3M2 15h3M19 9h3M19 12h3M19 15h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Automation &amp; Controls</li>
+          <li><svg class="icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 13L16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 3h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Process Optimization</li>
+          <li><svg class="icon-sm" viewBox="0 0 24 24"><polygon points="12,3 19,7.5 19,16.5 12,21 5,16.5 5,7.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>Electro-Mechanical Systems</li>
+        </ul>
+      </div>
+
+      <p class="handwritten">Always learning,<br />always engineering.</p>
     </div>
 
-    <div class="focus-card">
-      <p class="focus-label">FOCUSED ON</p>
-      <ul class="focus-list">
-        <li><svg class="icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="12" cy="12" r="1.6" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 2v3M12 19v3M22 12h-3M5 12H2M19.07 4.93l-2.12 2.12M7.05 16.95l-2.12 2.12M19.07 19.07l-2.12-2.12M7.05 7.05L4.93 4.93" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Mechanical Design (CAD)</li>
-        <li><svg class="icon-sm" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M9 2v3M12 2v3M15 2v3M9 19v3M12 19v3M15 19v3M2 9h3M2 12h3M2 15h3M19 9h3M19 12h3M19 15h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Automation &amp; Controls</li>
-        <li><svg class="icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 13L16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 3h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Process Optimization</li>
-        <li><svg class="icon-sm" viewBox="0 0 24 24"><polygon points="12,3 19,7.5 19,16.5 12,21 5,16.5 5,7.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>Electro-Mechanical Systems</li>
-      </ul>
+    <!--
+      Live controls for the blueprint above: dragging these regenerates
+      the SVG drawing (front view + sectioned side view) via
+      renderBlueprint() in script.js — a real parametric technical
+      drawing, not just a picture of one.
+    -->
+    <div class="blueprint-controls">
+      <p class="blueprint-controls-label">PARAMETRIC CONTROLS<span class="cursor">_</span></p>
+      <div class="blueprint-control">
+        <label for="ctrlTeeth">TEETH (Z)</label>
+        <input type="range" id="ctrlTeeth" min="6" max="24" step="1" value="12" />
+        <span class="blueprint-control-value" id="ctrlTeethValue">12</span>
+      </div>
+      <div class="blueprint-control">
+        <label for="ctrlDiameter">DIAMETER</label>
+        <input type="range" id="ctrlDiameter" min="60" max="140" step="2" value="100" />
+        <span class="blueprint-control-value" id="ctrlDiameterValue">100mm</span>
+      </div>
+      <div class="blueprint-control">
+        <label for="ctrlBore">BORE &#8960;</label>
+        <input type="range" id="ctrlBore" min="10" max="40" step="2" value="24" />
+        <span class="blueprint-control-value" id="ctrlBoreValue">24mm</span>
+      </div>
     </div>
-
-    <p class="handwritten">Always learning,<br />always engineering.</p>
   </div>
 </section>
 
