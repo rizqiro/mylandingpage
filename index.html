@@ -1,8 +1,25 @@
+<!--
+  One-page portfolio site. Structure (search for these comment
+  headers to jump around):
+    NAVBAR              - top logo + section links + CTA button
+    TECHIE SIDE SCROLL NAV - fixed right-edge HUD, mirrors NAVBAR links
+    HERO                - name, tagline, resume/CTA buttons, social icons
+    ABOUT               - intro text + stat cards
+    CREDENTIALS         - certification cards (see comment inside for how to add one)
+    PROJECTS            - project cards (see comment inside for how to add one)
+    CONTACT             - email/phone/location + social links again
+    FOOTER              - copyright line
+
+  Styling lives in styles.css (organized with matching section
+  comments), and the only interactive bit -- the side scroll nav
+  that highlights the active section -- lives in script.js.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Shows up in the browser tab and search results -- update the name if this isn't your site. -->
 <title>Abdul Samad — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Caveat:wght@500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -10,9 +27,15 @@
 </head>
 <body>
 
-<!-- NAVBAR -->
+<!--
+  NAVBAR
+  Top bar with your initials as a logo, the section links, and a CTA
+  button. Each nav-link's href (#home, #about, ...) must match the id="..."
+  on the <section> it jumps to further down the page.
+-->
 <header class="navbar">
   <div class="container navbar-inner">
+    <!-- "AS" = initials. Swap for your own initials or a text/image logo. -->
     <a href="#home" class="logo">AS<span class="dot">.</span></a>
     <nav class="nav-links">
       <a class="nav-link" href="#home">Home</a>
@@ -28,9 +51,17 @@
   </div>
 </header>
 
-<!-- TECHIE SIDE SCROLL NAV -->
+<!--
+  TECHIE SIDE SCROLL NAV
+  Fixed HUD on the right edge (desktop only, hidden below 900px -- see
+  .scroll-nav media query in styles.css). Purely a visual echo of the
+  NAVBAR links above: script.js watches which <section> is on screen
+  and toggles the "active" class here and on the top nav-links.
+  data-section on each <a> must match the section's id="..." below.
+-->
 <nav class="scroll-nav" aria-label="Section navigation">
   <div class="scroll-nav-rail">
+    <!-- Height of this bar is set by script.js as you scroll, to show reading progress. -->
     <div class="scroll-nav-progress" id="scrollProgress"></div>
   </div>
   <ul class="scroll-nav-list">
@@ -62,7 +93,13 @@
   </ul>
 </nav>
 
-<!-- HERO -->
+<!--
+  HERO
+  First thing visitors see. All the text here (name, tagline, bio) is
+  plain content -- just edit it in place, no styling knowledge needed.
+  The right-hand photo/glow/focus-card is styled in styles.css under
+  "Hero visual".
+-->
 <section class="hero-section" id="home">
 <div class="hero container">
   <div class="hero-text">
@@ -93,6 +130,12 @@
     </div>
 
     <p class="connect-label">LET'S CONNECT</p>
+    <!--
+      Social icon row. href="#" is a placeholder -- replace with your
+      real GitHub/LinkedIn/Instagram profile URLs, and swap
+      you@example.com for your real email. This exact same row is
+      repeated in the CONTACT section below; keep both in sync.
+    -->
     <div class="social-row">
       <a href="#" class="social-btn" aria-label="GitHub">
         <svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
@@ -110,6 +153,7 @@
   </div>
 
   <div class="hero-visual">
+    <!-- Glowing circle peeking out behind the portrait -- purely decorative, styled in .portrait-glow. -->
     <div class="portrait-glow"></div>
     <div class="portrait">
       <!--
@@ -119,6 +163,7 @@
       <img src="profile-photo.png" alt="Abdul Samad" class="portrait-photo" onerror="this.style.display='none'" />
     </div>
 
+    <!-- Small floating card listing your focus areas -- edit the text next to each icon; add/remove <li> items as needed. -->
     <div class="focus-card">
       <p class="focus-label">FOCUSED ON</p>
       <ul class="focus-list">
@@ -134,7 +179,12 @@
 </div>
 </section>
 
-<!-- ABOUT -->
+<!--
+  ABOUT
+  Intro blurb on the left plus 4 stat cards on the right (.stat-grid).
+  data-theme="light" flips this section to a light background -- see
+  script.js, which reads that attribute to keep the side nav readable.
+-->
 <section class="about-section" id="about" data-theme="light">
   <div class="container about-grid">
     <div class="about-intro">
@@ -156,6 +206,7 @@
       </a>
     </div>
 
+    <!-- 4 stat cards, each just a label + big number + subtitle + description. Edit the text directly. -->
     <div class="stat-grid">
       <div class="stat-card">
         <p class="card-label">Experience</p>
@@ -302,7 +353,16 @@
   </div>
 </section>
 
-<!-- PROJECTS -->
+<!--
+  PROJECTS
+  How to add/edit a project:
+  1. Copy one <article class="project-card">...</article> block below.
+  2. .project-thumb is the colored/light box at the top -- either plain
+     text via .project-kicker, or a small fake app preview via
+     .mock-app (see the "Line OEE Dashboard" card for that pattern).
+     Swap in a real screenshot/image if you have one instead.
+  3. Update .project-name and the .tag (tech stack) pills in .tag-row.
+-->
 <section class="projects-section container" id="projects">
   <div class="projects-header">
     <div>
@@ -407,6 +467,7 @@
         <code>href</code> values in the <code>social-row</code> for your
         real profiles.
       </p>
+      <!-- Same social row/links as the HERO section -- update both when you add your real profile URLs. -->
       <div class="social-row">
         <a href="#" class="social-btn" aria-label="GitHub">
           <svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
@@ -425,7 +486,7 @@
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- FOOTER -- update the year/name in the copyright line as needed. -->
 <footer class="footer">
   <div class="container footer-inner">
     <div class="logo">AS<span class="dot">.</span></div>
@@ -434,6 +495,7 @@
   </div>
 </footer>
 
+<!-- Powers the side scroll-nav highlighting + progress bar (see TECHIE SIDE SCROLL NAV above). -->
 <script src="script.js"></script>
 </body>
 </html>

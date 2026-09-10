@@ -1,3 +1,8 @@
+/*
+  Color palette used across the whole site. Change a value here and it
+  updates everywhere that variable is referenced (var(--indigo), etc.)
+  -- no need to hunt down individual hex codes.
+*/
 :root {
   --bg: #000000;
   --indigo: #6366f1;
@@ -49,7 +54,8 @@ body {
   flex-shrink: 0;
 }
 
-/* Buttons */
+/* ===================== BUTTONS ===================== */
+/* Base .btn style, then .btn-pill/.btn-primary/.btn-outline/etc. mix in shape + color variants. */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -103,7 +109,7 @@ body {
   background: #111;
 }
 
-/* Navbar */
+/* ===================== NAVBAR ===================== */
 .navbar {
   padding: 24px 0;
 }
@@ -163,7 +169,7 @@ body {
   .nav-links { display: none; }
 }
 
-/* Hero */
+/* ===================== HERO ===================== */
 .hero-section {
   position: relative;
   overflow: hidden;
@@ -277,7 +283,7 @@ body {
   color: #fff;
 }
 
-/* Hero visual */
+/* Hero visual -- the photo card, glow, and floating "focus" card on the right side of the hero. */
 .hero-visual {
   position: relative;
 }
@@ -372,7 +378,7 @@ body {
   .handwritten { display: block; }
 }
 
-/* Page header (used above the Contact section) */
+/* ===== Page header (used above the Contact section) ===== */
 .page-header {
   padding: 64px 24px 8px;
   text-align: center;
@@ -394,7 +400,7 @@ body {
   margin: 0 auto;
 }
 
-/* About section */
+/* ===================== ABOUT ===================== */
 .about-section {
   background: #fafafa;
   color: #18181b;
@@ -521,7 +527,7 @@ body {
   .about-grid { grid-template-columns: 1fr; }
 }
 
-/* Credentials / Certifications */
+/* ===================== CREDENTIALS / CERTIFICATIONS ===================== */
 .credentials-section {
   padding: 80px 24px;
 }
@@ -664,7 +670,7 @@ body {
   max-width: 220px;
 }
 
-/* Projects */
+/* ===================== PROJECTS ===================== */
 .projects-section {
   padding: 80px 24px;
 }
@@ -784,7 +790,7 @@ body {
   padding: 4px 10px;
 }
 
-/* Contact page */
+/* ===================== CONTACT ===================== */
 .contact-section {
   padding: 48px 24px 80px;
 }
@@ -850,7 +856,7 @@ body {
   max-width: 380px;
 }
 
-/* Footer */
+/* ===================== FOOTER ===================== */
 .footer {
   border-top: 1px solid var(--zinc-900);
   padding: 32px 24px;
