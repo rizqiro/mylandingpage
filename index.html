@@ -4,15 +4,24 @@
     NAVBAR              - top logo + section links + CTA button
     TECHIE SIDE SCROLL NAV - fixed right-edge HUD, mirrors NAVBAR links
     HERO                - name, tagline, resume/CTA buttons, social icons
-    ABOUT               - intro text + stat cards
+    ABOUT               - intro text + stat cards + photo carousel
+    CAREER & EDUCATION  - work-history timeline + education cards
     CREDENTIALS         - certification cards (see comment inside for how to add one)
     PROJECTS            - project cards (see comment inside for how to add one)
     CONTACT             - email/phone/location + social links again
     FOOTER              - copyright line
+    CREDENTIAL MODAL    - pop-up that shows a certificate image on click
 
   Styling lives in styles.css (organized with matching section
-  comments), and the only interactive bit -- the side scroll nav
-  that highlights the active section -- lives in script.js.
+  comments). script.js drives the side scroll nav, the About photo
+  carousel, and the credential pop-up modal.
+
+  Icons and images now live in their own folders instead of being
+  repeated inline:
+    icons/sprite.svg   - every SVG icon, referenced via <use>
+    images/            - background art, the About carousel photos,
+                         and certificate images for the credential modal
+  See README.md for how to swap in your own photos/certificates.
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -40,13 +49,14 @@
     <nav class="nav-links">
       <a class="nav-link" href="#home">Home</a>
       <a class="nav-link" href="#about">About</a>
+      <a class="nav-link" href="#career">Career &amp; Education</a>
       <a class="nav-link" href="#credentials">Credentials</a>
       <a class="nav-link" href="#projects">Projects</a>
       <a class="nav-link" href="#contact">Contact</a>
     </nav>
     <a class="btn btn-outline btn-pill" href="#contact">
       Let's Connect
-      <svg class="icon" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg class="icon"><use href="#icon-arrow-up-right"></use></svg>
     </a>
   </div>
 </header>
@@ -71,18 +81,23 @@
       <span class="scroll-nav-label">about<span class="cursor">_</span></span>
       <span class="scroll-nav-dot"></span>
     </a></li>
-    <li><a href="#credentials" class="scroll-nav-item" data-section="credentials">
+    <li><a href="#career" class="scroll-nav-item" data-section="career">
       <span class="scroll-nav-num">03</span>
+      <span class="scroll-nav-label">career<span class="cursor">_</span></span>
+      <span class="scroll-nav-dot"></span>
+    </a></li>
+    <li><a href="#credentials" class="scroll-nav-item" data-section="credentials">
+      <span class="scroll-nav-num">04</span>
       <span class="scroll-nav-label">credentials<span class="cursor">_</span></span>
       <span class="scroll-nav-dot"></span>
     </a></li>
     <li><a href="#projects" class="scroll-nav-item" data-section="projects">
-      <span class="scroll-nav-num">04</span>
+      <span class="scroll-nav-num">05</span>
       <span class="scroll-nav-label">projects<span class="cursor">_</span></span>
       <span class="scroll-nav-dot"></span>
     </a></li>
     <li><a href="#contact" class="scroll-nav-item" data-section="contact">
-      <span class="scroll-nav-num">05</span>
+      <span class="scroll-nav-num">06</span>
       <span class="scroll-nav-label">contact<span class="cursor">_</span></span>
       <span class="scroll-nav-dot"></span>
     </a></li>
@@ -111,24 +126,24 @@
       <span class="text-pink">goal-driven.</span>
     </p>
     <p class="hero-desc">
-      Production Manager in glass manufacturing. I lead teams 
-      and refine processes based on PDCA cycle, building systems that turn complex 
+      Production Manager in glass manufacturing. I lead teams
+      and refine processes based on PDCA cycle, building systems that turn complex
       operations into consistent results.
       <br>
-      Having bacground in mechatronics engineering and interest on physics allow me 
+      Having bacground in mechatronics engineering and interest on physics allow me
       to deliver solutions to enhance production process.
     </p>
-    
+
 
     <div class="hero-actions">
       <a class="btn btn-primary btn-pill" href="#projects">
         View My Work
-        <svg class="icon" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon"><use href="#icon-arrow-up-right"></use></svg>
       </a>
       <!-- Point this at your real resume file once you add one to the project. -->
       <a class="btn btn-outline btn-pill" href="resume.pdf" download>
         Download Resume
-        <svg class="icon" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon"><use href="#icon-download"></use></svg>
       </a>
     </div>
 
@@ -136,16 +151,16 @@
     <!--connect to the social media-->
     <div class="social-row">
       <a href="https://id.quora.com/profile/Rizqi-Romadhon" target="_blank" class="social-btn" aria-label="Quora">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        <svg class="icon"><use href="#icon-github"></use></svg>
       </a>
       <a href="http://www.linkedin.com/in/rizqi-romadhon-4763a81a4" target="_blank" class="social-btn" aria-label="LinkedIn">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        <svg class="icon"><use href="#icon-linkedin"></use></svg>
       </a>
       <a href="https://www.instagram.com/rizqi_ro/" target="_blank" class="social-btn" aria-label="Instagram">
-        <svg class="icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        <svg class="icon"><use href="#icon-instagram"></use></svg>
       </a>
       <a href="mailto:rizqi-romadhon@outlook.com" class="social-btn" aria-label="Email">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16v16H4zM22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        <svg class="icon"><use href="#icon-email"></use></svg>
       </a>
     </div>
   </div>
@@ -155,20 +170,20 @@
     <div class="portrait-glow"></div>
     <div class="portrait">
       <!--
-        Real headshot goes here. Drop the file in next to index.html and
+        Real headshot goes here. Drop the file in images/ and
         point src at it -- the layout, glow, and card below all stay put.
       -->
-      <img src="profile-photo.png" alt="Abdul Samad" class="portrait-photo" onerror="this.style.display='none'" />
+      <img src="images/profile-photo.png" alt="Rizqi Romadhon" class="portrait-photo" onerror="this.style.display='none'" />
     </div>
 
     <!-- Small floating card listing your focus areas -- edit the text next to each icon; add/remove <li> items as needed. -->
     <div class="focus-card">
       <p class="focus-label">FOCUSED ON</p>
       <ul class="focus-list">
-        <li><svg class="icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="12" cy="12" r="1.6" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 2v3M12 19v3M22 12h-3M5 12H2M19.07 4.93l-2.12 2.12M7.05 16.95l-2.12 2.12M19.07 19.07l-2.12-2.12M7.05 7.05L4.93 4.93" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Manufacturing process</li>
-        <li><svg class="icon-sm" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M9 2v3M12 2v3M15 2v3M9 19v3M12 19v3M15 19v3M2 9h3M2 12h3M2 15h3M19 9h3M19 12h3M19 15h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Automation &amp; Controls</li>
-        <li><svg class="icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 13L16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 3h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Process Optimization</li>
-        <li><svg class="icon-sm" viewBox="0 0 24 24"><polygon points="12,3 19,7.5 19,16.5 12,21 5,16.5 5,7.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>Electro-Mechanical Systems</li>
+        <li><svg class="icon-sm"><use href="#icon-settings"></use></svg>Manufacturing process</li>
+        <li><svg class="icon-sm"><use href="#icon-automation"></use></svg>Automation &amp; Controls</li>
+        <li><svg class="icon-sm"><use href="#icon-optimization"></use></svg>Process Optimization</li>
+        <li><svg class="icon-sm"><use href="#icon-hexagon"></use></svg>Electro-Mechanical Systems</li>
       </ul>
     </div>
   </div>
@@ -177,9 +192,10 @@
 
 <!--
   ABOUT
-  Intro blurb on the left plus 4 stat cards on the right (.stat-grid).
-  data-theme="light" flips this section to a light background -- see
-  script.js, which reads that attribute to keep the side nav readable.
+  Intro blurb, 4 stat cards, and a photo carousel -- all in one grid
+  (.about-grid). data-theme="light" flips this section to a light
+  background -- see script.js, which reads that attribute to keep the
+  side nav readable.
 -->
 <section class="about-section" id="about" data-theme="light">
   <div class="container about-grid">
@@ -196,7 +212,7 @@
       </p>
       <a class="btn btn-outline-dark btn-pill" href="#contact">
         Contact me
-        <svg class="icon" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="icon"><use href="#icon-arrow-up-right"></use></svg>
       </a>
     </div>
 
@@ -216,25 +232,195 @@
       </div>
       <div class="stat-card">
         <p class="card-label">Interest</p>
-        <div class="card-icon"><svg class="icon-sm" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M9 2v3M12 2v3M15 2v3M9 19v3M12 19v3M15 19v3M2 9h3M2 12h3M2 15h3M19 9h3M19 12h3M19 15h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <div class="card-icon"><svg class="icon-sm"><use href="#icon-automation"></use></svg></div>
         <p class="card-title">Science &amp; Engineering</p>
         <p class="card-desc">Physics, CAD &amp; Mechatronics engineering</p>
       </div>
       <div class="stat-card">
         <p class="card-label">Currently</p>
-        <div class="card-icon"><svg class="icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 13L16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 3h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <div class="card-icon"><svg class="icon-sm"><use href="#icon-optimization"></use></svg></div>
         <p class="card-title">Production Manager</p>
         <p class="card-desc">Lean, Six Sigma &amp; People and Process enhancement</p>
       </div>
     </div>
 
-    <div class="about-image">
-      <div class="about-image-lines">
-        <span style="width:80%"></span>
-        <span style="width:55%"></span>
-        <span style="width:65%"></span>
-        <span style="width:40%"></span>
-        <span style="width:70%"></span>
+    <!--
+      PHOTO CAROUSEL
+      Slides through the images below -- 3 slots by default. To put your
+      own photo in a slot, drop a file at the exact path in that slide's
+      <img src="..."> (images/about/slide-1.jpg, etc.). Until a file
+      exists there, the image fails to load silently and the dashed
+      placeholder (camera icon + hint text) shows through instead, so
+      the carousel is fully usable before you add real photos.
+      Add a 4th slide by copying a .carousel-slide block and adding a
+      matching .carousel-dot button.
+    -->
+    <div class="about-carousel" id="aboutCarousel">
+      <div class="carousel-track" id="aboutCarouselTrack">
+        <div class="carousel-slide">
+          <img src="images/about/slide-1.jpg" alt="Rizqi on the production floor" class="carousel-photo" onerror="this.style.display='none'" />
+          <div class="carousel-placeholder">
+            <svg class="icon-lg"><use href="#icon-camera"></use></svg>
+            <p>Add a photo<br><span>images/about/slide-1.jpg</span></p>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <img src="images/about/slide-2.jpg" alt="Rizqi at work" class="carousel-photo" onerror="this.style.display='none'" />
+          <div class="carousel-placeholder">
+            <svg class="icon-lg"><use href="#icon-camera"></use></svg>
+            <p>Add a photo<br><span>images/about/slide-2.jpg</span></p>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <img src="images/about/slide-3.jpg" alt="Rizqi with the team" class="carousel-photo" onerror="this.style.display='none'" />
+          <div class="carousel-placeholder">
+            <svg class="icon-lg"><use href="#icon-camera"></use></svg>
+            <p>Add a photo<br><span>images/about/slide-3.jpg</span></p>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="carousel-btn carousel-prev" aria-label="Previous photo">
+        <svg class="icon"><use href="#icon-chevron-left"></use></svg>
+      </button>
+      <button type="button" class="carousel-btn carousel-next" aria-label="Next photo">
+        <svg class="icon"><use href="#icon-chevron-right"></use></svg>
+      </button>
+
+      <div class="carousel-dots">
+        <button type="button" class="carousel-dot active" data-index="0" aria-label="Go to photo 1"></button>
+        <button type="button" class="carousel-dot" data-index="1" aria-label="Go to photo 2"></button>
+        <button type="button" class="carousel-dot" data-index="2" aria-label="Go to photo 3"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--
+  CAREER & EDUCATION
+  Left: a vertical timeline of your work history, newest first. Right:
+  education. Each timeline item is one .timeline-item -- copy one to add
+  a role, or edit the text in place to update yours.
+-->
+<section class="career-section container" id="career">
+  <div class="career-header">
+    <div>
+      <p class="eyebrow">MY JOURNEY</p>
+      <h2 class="career-title">Career &amp; Education</h2>
+      <p class="career-desc">
+        A decade in glass manufacturing -- from the production floor to
+        leading the department -- plus the education that got me started.
+      </p>
+    </div>
+  </div>
+
+  <div class="career-grid">
+    <!--
+      TIMELINE
+      HOW TO ADD A ROLE: copy one <li class="timeline-item">...</li>
+      block, update the period/role/company/scope/achievement, and paste
+      it at the top (most recent first).
+    -->
+    <ol class="timeline">
+      <li class="timeline-item">
+        <div class="timeline-marker">
+          <span class="timeline-dot"><svg class="icon-sm"><use href="#icon-briefcase"></use></svg></span>
+        </div>
+        <div class="timeline-content">
+          <p class="timeline-period">AUGUST 2023 — PRESENT</p>
+          <h3 class="timeline-role">Production Forming Manager</h3>
+          <p class="timeline-company">PT KCC Glass Indonesia</p>
+          <ul class="timeline-scope">
+            <li>Own daily reporting to the General Manager and department budget/procurement</li>
+            <li>Develop &amp; implement maintenance plans, coordinating across departments</li>
+            <li>Enhance production yield through equipment upgrades and process improvements</li>
+            <li>Write operational guidelines and work instructions for shift &amp; daywork teams</li>
+          </ul>
+          <div class="timeline-achievements">
+            <span class="achievement-chip">Production started Oct 2023</span>
+            <span class="achievement-chip">Local packaging &amp; supplier network built from scratch</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <div class="timeline-marker">
+          <span class="timeline-dot"><svg class="icon-sm"><use href="#icon-briefcase"></use></svg></span>
+        </div>
+        <div class="timeline-content">
+          <p class="timeline-period">MAY 2021 — AUGUST 2023</p>
+          <h3 class="timeline-role">Head of Section</h3>
+          <p class="timeline-company">PT Asahimas Flat Glass Tbk</p>
+          <ul class="timeline-scope">
+            <li>Led 160 people across 4 shifts (4 Foremen + 36 Operators per shift)</li>
+            <li>Owned safety reporting and coached teams on quality, packaging &amp; handling</li>
+            <li>Handled internal &amp; customer quality issues; wrote SOPs and work instructions</li>
+            <li>Built Tableau/Excel dashboards and monthly reports for management &amp; HQ</li>
+          </ul>
+          <div class="timeline-achievements">
+            <span class="achievement-chip">New defect detector: Rp 300–450M / month saved</span>
+            <span class="achievement-chip">Packaging cost: Rp 15–30M / month saved</span>
+            <span class="achievement-chip">Offline capacity doubled: +67,500 kg/month</span>
+            <span class="achievement-chip">Manpower savings: Rp 10M / month</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <div class="timeline-marker">
+          <span class="timeline-dot"><svg class="icon-sm"><use href="#icon-briefcase"></use></svg></span>
+        </div>
+        <div class="timeline-content">
+          <p class="timeline-period">MAY 2019 — MAY 2021</p>
+          <h3 class="timeline-role">Head of Unit</h3>
+          <p class="timeline-company">PT Asahimas Flat Glass Tbk</p>
+          <ul class="timeline-scope">
+            <li>Led 40 people per shift (4 Foremen + 30 Operators) to keep production running</li>
+            <li>Reported directly to Head of Section &amp; Manager; owned safety reporting</li>
+            <li>Coached subordinates on continuous improvement across the working process</li>
+          </ul>
+          <div class="timeline-achievements">
+            <span class="achievement-chip">Defect-loss optimization: Rp 25–50M / month saved</span>
+            <span class="achievement-chip">Packaging simplification: Rp 10–15M / month saved</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <div class="timeline-marker">
+          <span class="timeline-dot"><svg class="icon-sm"><use href="#icon-flag"></use></svg></span>
+        </div>
+        <div class="timeline-content">
+          <p class="timeline-period">OCTOBER 2016 — MAY 2019</p>
+          <h3 class="timeline-role">Production Staff</h3>
+          <p class="timeline-company">PT Asahimas Flat Glass Tbk</p>
+          <ul class="timeline-scope">
+            <li>Led 40 people per shift (4 Foremen + 30 Operators) to keep production running</li>
+            <li>Reported directly to Head of Section &amp; Manager</li>
+          </ul>
+          <div class="timeline-achievements">
+            <span class="achievement-chip">Rocket startup project completed, 2016</span>
+            <span class="achievement-chip">Established visual management &amp; work instructions</span>
+            <span class="achievement-chip">Automated branch-usage calculation, cutting cycle loss</span>
+          </div>
+        </div>
+      </li>
+    </ol>
+
+    <!--
+      EDUCATION
+      Placeholder entry below -- swap in your school, degree, years and
+      any honors/activities. Copy the .education-card block to add more
+      (a second degree, a bootcamp, etc.).
+    -->
+    <div class="education-list">
+      <p class="education-label">EDUCATION</p>
+      <div class="education-card">
+        <div class="education-icon"><svg class="icon"><use href="#icon-graduation"></use></svg></div>
+        <h3 class="education-degree">Bachelor of Engineering — Mechatronics Engineering</h3>
+        <p class="education-school">[Add your university name]</p>
+        <p class="education-years">[Add years attended]</p>
+        <p class="card-desc">[Add relevant coursework, thesis topic, or honors here.]</p>
       </div>
     </div>
   </div>
@@ -247,8 +433,8 @@
       <p class="eyebrow">VERIFIED</p>
       <h2 class="credentials-title">Certifications &amp; Credentials</h2>
       <p class="credentials-desc">
-        Certifications and credentials that back up my skills — shared here
-        so employers and clients can verify them directly.
+        Certifications and credentials that back up my skills. Click
+        "View Credential" on any card to see the certificate image.
       </p>
     </div>
   </div>
@@ -258,18 +444,18 @@
     ----------------------------------
     1. Copy one <article class="credential-card">...</article> block below.
     2. Replace the title, issuer, date, and credential ID text.
-    3. Set the href on .credential-link to the public "verify" / "view
-       credential" URL your issuer gave you (LinkedIn, Credly, Coursera,
-       AWS, Google, Microsoft, etc. all provide one).
-    4. Paste the new block anywhere inside .credentials-grid, right before
-       the dashed "Add your next certification" card at the end.
+    3. Set data-cert-image on the "View Credential" button to a path
+       under images/credentials/ -- drop your scanned certificate file
+       at that exact path and it'll show up in the pop-up automatically.
+       Until the file exists, a placeholder graphic shows instead.
+    4. Paste the new block anywhere inside .credentials-grid.
   -->
   <div class="credentials-grid">
 
     <article class="credential-card">
       <div class="credential-top">
         <div class="credential-icon">
-          <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="12" cy="12" r="1.6" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 2v3M12 19v3M22 12h-3M5 12H2M19.07 4.93l-2.12 2.12M7.05 16.95l-2.12 2.12M19.07 19.07l-2.12-2.12M7.05 7.05L4.93 4.93" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <svg class="icon"><use href="#icon-settings"></use></svg>
         </div>
         <span class="credential-badge">VERIFIED</span>
       </div>
@@ -278,16 +464,16 @@
         <p class="credential-issuer">BBPLK Bandung · Autodesk Inventor</p>
       </div>
       <p class="credential-meta">Issued August 2014 · Credential 2095/BBPLKDN/VII/2014</p>
-      <a href="#" class="credential-link" target="_blank" rel="noopener noreferrer">
+      <button type="button" class="credential-link" data-cert-image="images/credentials/cad-2d-3d-modelling.jpg" data-cert-title="Certified CAD 2D and 3D modelling">
         View Credential
-        <svg class="icon-sm" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+        <svg class="icon-sm"><use href="#icon-arrow-up-right"></use></svg>
+      </button>
     </article>
 
     <article class="credential-card">
       <div class="credential-top">
         <div class="credential-icon">
-          <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 13L16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 3h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <svg class="icon"><use href="#icon-optimization"></use></svg>
         </div>
         <span class="credential-badge">VERIFIED</span>
       </div>
@@ -296,16 +482,16 @@
         <p class="credential-issuer">Six Sigma · Academy Amsterdam</p>
       </div>
       <p class="credential-meta">Issued June 2023 · Credential 95589197-7180-422c-ab04-74e6631027dd</p>
-      <a href="#" class="credential-link" target="_blank" rel="noopener noreferrer">
+      <button type="button" class="credential-link" data-cert-image="images/credentials/lean-six-sigma-green-belt.jpg" data-cert-title="Lean Six Sigma Green Belt">
         View Credential
-        <svg class="icon-sm" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+        <svg class="icon-sm"><use href="#icon-arrow-up-right"></use></svg>
+      </button>
     </article>
 
-        <article class="credential-card">
+    <article class="credential-card">
       <div class="credential-top">
         <div class="credential-icon">
-          <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 13L16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 3h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <svg class="icon"><use href="#icon-optimization"></use></svg>
         </div>
         <span class="credential-badge">VERIFIED</span>
       </div>
@@ -314,16 +500,16 @@
         <p class="credential-issuer">Six Sigma · Academy Amsterdam</p>
       </div>
       <p class="credential-meta">Issued July 2023 · Credential 97106a72-9e0f-4955-a934-bf35c59b87d4</p>
-      <a href="#" class="credential-link" target="_blank" rel="noopener noreferrer">
+      <button type="button" class="credential-link" data-cert-image="images/credentials/lean-six-sigma-black-belt.jpg" data-cert-title="Lean Six Sigma Black Belt">
         View Credential
-        <svg class="icon-sm" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+        <svg class="icon-sm"><use href="#icon-arrow-up-right"></use></svg>
+      </button>
     </article>
 
     <article class="credential-card">
       <div class="credential-top">
         <div class="credential-icon">
-          <svg class="icon" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M9 2v3M12 2v3M15 2v3M9 19v3M12 19v3M15 19v3M2 9h3M2 12h3M2 15h3M19 9h3M19 12h3M19 15h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <svg class="icon"><use href="#icon-automation"></use></svg>
         </div>
         <span class="credential-badge">VERIFIED</span>
       </div>
@@ -331,17 +517,17 @@
         <h3 class="credential-title">Unit Head · Certificate of Promotion</h3>
         <p class="credential-issuer">Asahimas . AGC Group Asia Pacific</p>
       </div>
-      <p class="credential-meta">Issued April 2020 · Credential ID 545/HR&IR-FG.CKP/IV/2020</p>
-      <a href="#" class="credential-link" target="_blank" rel="noopener noreferrer">
+      <p class="credential-meta">Issued April 2020 · Credential ID 545/HR&amp;IR-FG.CKP/IV/2020</p>
+      <button type="button" class="credential-link" data-cert-image="images/credentials/unit-head-promotion.jpg" data-cert-title="Unit Head · Certificate of Promotion">
         View Credential
-        <svg class="icon-sm" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+        <svg class="icon-sm"><use href="#icon-arrow-up-right"></use></svg>
+      </button>
     </article>
 
-        <article class="credential-card">
+    <article class="credential-card">
       <div class="credential-top">
         <div class="credential-icon">
-          <svg class="icon" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M9 2v3M12 2v3M15 2v3M9 19v3M12 19v3M15 19v3M2 9h3M2 12h3M2 15h3M19 9h3M19 12h3M19 15h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <svg class="icon"><use href="#icon-automation"></use></svg>
         </div>
         <span class="credential-badge">VERIFIED</span>
       </div>
@@ -349,17 +535,17 @@
         <h3 class="credential-title">Section Chief · Certificate of Promotion</h3>
         <p class="credential-issuer">Asahimas . AGC Group Asia Pacific</p>
       </div>
-      <p class="credential-meta">Issued April 2022 · Credential ID 231/HR&IR-FG.CKP/IV/2022</p>
-      <a href="#" class="credential-link" target="_blank" rel="noopener noreferrer">
+      <p class="credential-meta">Issued April 2022 · Credential ID 231/HR&amp;IR-FG.CKP/IV/2022</p>
+      <button type="button" class="credential-link" data-cert-image="images/credentials/section-chief-promotion.jpg" data-cert-title="Section Chief · Certificate of Promotion">
         View Credential
-        <svg class="icon-sm" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+        <svg class="icon-sm"><use href="#icon-arrow-up-right"></use></svg>
+      </button>
     </article>
 
     <article class="credential-card">
       <div class="credential-top">
         <div class="credential-icon">
-          <svg class="icon" viewBox="0 0 24 24"><polygon points="12,3 19,7.5 19,16.5 12,21 5,16.5 5,7.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+          <svg class="icon"><use href="#icon-hexagon"></use></svg>
         </div>
         <span class="credential-badge">VERIFIED</span>
       </div>
@@ -368,16 +554,16 @@
         <p class="credential-issuer">Patria . United Tractor Pandu Engineering</p>
       </div>
       <p class="credential-meta">Issued January 2016</p>
-      <a href="#" class="credential-link" target="_blank" rel="noopener noreferrer">
+      <button type="button" class="credential-link" data-cert-image="images/credentials/rnd-internship.jpg" data-cert-title="Research and Development Internship">
         View Credential
-        <svg class="icon-sm" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+        <svg class="icon-sm"><use href="#icon-arrow-up-right"></use></svg>
+      </button>
     </article>
 
-        <article class="credential-card">
+    <article class="credential-card">
       <div class="credential-top">
         <div class="credential-icon">
-          <svg class="icon" viewBox="0 0 24 24"><polygon points="12,3 19,7.5 19,16.5 12,21 5,16.5 5,7.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+          <svg class="icon"><use href="#icon-hexagon"></use></svg>
         </div>
         <span class="credential-badge">VERIFIED</span>
       </div>
@@ -386,16 +572,16 @@
         <p class="credential-issuer">KCC Glass Corporation</p>
       </div>
       <p class="credential-meta">Issued November 2023</p>
-      <a href="#" class="credential-link" target="_blank" rel="noopener noreferrer">
+      <button type="button" class="credential-link" data-cert-image="images/credentials/glass-manufacturing-training.jpg" data-cert-title="Glass Manufacturing Training">
         View Credential
-        <svg class="icon-sm" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+        <svg class="icon-sm"><use href="#icon-arrow-up-right"></use></svg>
+      </button>
     </article>
 
-            <article class="credential-card">
+    <article class="credential-card">
       <div class="credential-top">
         <div class="credential-icon">
-          <svg class="icon" viewBox="0 0 24 24"><polygon points="12,3 19,7.5 19,16.5 12,21 5,16.5 5,7.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+          <svg class="icon"><use href="#icon-hexagon"></use></svg>
         </div>
         <span class="credential-badge">VERIFIED</span>
       </div>
@@ -404,16 +590,16 @@
         <p class="credential-issuer">Dr Angela Yu . Udemy</p>
       </div>
       <p class="credential-meta">Issued January 2020 . Credential ID UC-3M64K25G</p>
-      <a href="#" class="credential-link" target="_blank" rel="noopener noreferrer">
+      <button type="button" class="credential-link" data-cert-image="images/credentials/flutter-bootcamp.jpg" data-cert-title="Complete Flutter App Development Bootcamp">
         View Credential
-        <svg class="icon-sm" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+        <svg class="icon-sm"><use href="#icon-arrow-up-right"></use></svg>
+      </button>
     </article>
 
-            <article class="credential-card">
+    <article class="credential-card">
       <div class="credential-top">
         <div class="credential-icon">
-          <svg class="icon" viewBox="0 0 24 24"><polygon points="12,3 19,7.5 19,16.5 12,21 5,16.5 5,7.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+          <svg class="icon"><use href="#icon-hexagon"></use></svg>
         </div>
         <span class="credential-badge">VERIFIED</span>
       </div>
@@ -422,10 +608,10 @@
         <p class="credential-issuer">Dr Angela Yu . Udemy</p>
       </div>
       <p class="credential-meta">Issued September 2026</p>
-      <a href="#" class="credential-link" target="_blank" rel="noopener noreferrer">
+      <button type="button" class="credential-link" data-cert-image="images/credentials/fullstack-bootcamp.jpg" data-cert-title="Complete Full-Stack Web Development Bootcamp">
         View Credential
-        <svg class="icon-sm" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+        <svg class="icon-sm"><use href="#icon-arrow-up-right"></use></svg>
+      </button>
     </article>
 
   </div>
@@ -517,21 +703,21 @@
     <div class="contact-grid">
       <div class="contact-card">
         <div class="card-icon">
-          <svg class="icon-sm" viewBox="0 0 24 24"><path d="M4 4h16v16H4zM22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          <svg class="icon-sm"><use href="#icon-email"></use></svg>
         </div>
         <p class="card-title">Email</p>
         <a href="mailto:you@example.com">rizqi-romadhon@outlook.com</a>
       </div>
       <div class="contact-card">
         <div class="card-icon">
-          <svg class="icon-sm" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          <svg class="icon-sm"><use href="#icon-phone"></use></svg>
         </div>
         <p class="card-title">Phone</p>
         <a href="tel:+10000000000">(+62) 896 927 119 67</a>
       </div>
       <div class="contact-card">
         <div class="card-icon">
-          <svg class="icon-sm" viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0118 0z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+          <svg class="icon-sm"><use href="#icon-location"></use></svg>
         </div>
         <p class="card-title">Location</p>
         <a href="#">Jawa Tengah, Indonesia</a>
@@ -546,16 +732,16 @@
       <!-- Same social row/links as the HERO section -- update both when you add your real profile URLs. -->
       <div class="social-row">
         <a href="#" class="social-btn" aria-label="GitHub">
-          <svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          <svg class="icon"><use href="#icon-github"></use></svg>
         </a>
         <a href="#" class="social-btn" aria-label="LinkedIn">
-          <svg class="icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          <svg class="icon"><use href="#icon-linkedin"></use></svg>
         </a>
         <a href="#" class="social-btn" aria-label="Instagram">
-          <svg class="icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          <svg class="icon"><use href="#icon-instagram"></use></svg>
         </a>
         <a href="mailto:you@example.com" class="social-btn" aria-label="Email">
-          <svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16v16H4zM22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          <svg class="icon"><use href="#icon-email"></use></svg>
         </a>
       </div>
     </div>
@@ -571,7 +757,33 @@
   </div>
 </footer>
 
-<!-- Powers the side scroll-nav highlighting + progress bar (see TECHIE SIDE SCROLL NAV above). -->
+<!--
+  CREDENTIAL MODAL
+  Hidden by default (the `hidden` attribute). Clicking any "View
+  Credential" button in the CREDENTIALS section opens this instead of
+  navigating away -- script.js reads that button's data-cert-image /
+  data-cert-title and fills this in. If the image file doesn't exist yet
+  at that path, the dashed placeholder shows instead so the pop-up is
+  never blank.
+-->
+<div class="cert-modal" id="certModal" hidden>
+  <div class="cert-modal-backdrop" data-close-modal></div>
+  <div class="cert-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="certModalTitle">
+    <button type="button" class="cert-modal-close" data-close-modal aria-label="Close">
+      <svg class="icon"><use href="#icon-close"></use></svg>
+    </button>
+    <div class="cert-modal-image-wrap">
+      <img src="" alt="" class="cert-modal-image" id="certModalImage" />
+      <div class="cert-modal-placeholder" id="certModalPlaceholder">
+        <svg class="icon-lg"><use href="#icon-certificate"></use></svg>
+        <p>Certificate image not added yet<br><span id="certModalHint"></span></p>
+      </div>
+    </div>
+    <p class="cert-modal-title" id="certModalTitle"></p>
+  </div>
+</div>
+
+<!-- Powers the side scroll-nav highlighting, the About carousel, and the credential modal. -->
 <script src="script.js"></script>
 </body>
 </html>
