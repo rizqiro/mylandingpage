@@ -122,6 +122,23 @@ The top navbar links (`#home`, `#about`, …) jump to each section, and
 `html { scroll-behavior: smooth }` makes that a smooth scroll rather than
 a jump cut.
 
+### Alternating black/white theme
+
+Background color alternates section by section: Home (black) → About
+(white) → Career & Education (black) → Credentials (white) → Projects
+through Contact and the Footer (black, all the way to the bottom — no
+more alternating after Projects).
+
+A white section is just `background: #fafafa; color: #18181b;` on the
+full-width `<section>` (see `.about-section` / `.credentials-section` in
+`styles.css`), rounded on whichever corners face a dark neighbor —
+About only touches a dark section above (Hero), so it rounds just its
+top corners; Credentials has a dark section on both sides (Career,
+Projects), so it rounds all four. Add `data-theme="light"` to a
+section's `<section>` tag when you do this — `initScrollNav()` in
+`script.js` reads that attribute to swap the fixed side nav to
+dark-on-light colors while that section is in view.
+
 ## Career & Education
 
 `.timeline` in the **Career & Education** section lists your work
