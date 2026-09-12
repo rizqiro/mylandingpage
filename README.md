@@ -122,6 +122,29 @@ The top navbar links (`#home`, `#about`, …) jump to each section, and
 `html { scroll-behavior: smooth }` makes that a smooth scroll rather than
 a jump cut.
 
+### Alternating background bands
+
+Background shade alternates section by section instead of staying flat
+black end to end: Home (pure black) → About (white) → Career & Education
+(pure black) → Credentials (dark charcoal) → Projects through Contact
+and the Footer (pure black, all the way to the bottom — no more
+alternating after Projects).
+
+About is the one full white band, rounded only at the top since it
+hangs directly off the Hero. Credentials is a step subtler: `var(--zinc-950)`
+(see `:root` in `styles.css`) instead of the page's pure `#000`, rounded
+on all four corners since it sits between two pure-black sections
+(Career, Projects) rather than the page edge. Its cards step up one
+shade lighter again (`var(--zinc-800)`) so they still read as raised
+panels against the band instead of blending into it.
+
+To add another alternating band of your own: give the section's
+`<section>` a full-bleed background/`border-radius` (no `container`
+class on the section itself), wrap its content in an inner
+`<div class="container">`, and put any vertical padding on the section
+(`padding: 80px 0`) rather than the container, so you don't end up with
+doubled-up horizontal padding.
+
 ## Career & Education
 
 `.timeline` in the **Career & Education** section lists your work
