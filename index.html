@@ -20,7 +20,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!-- Shows up in the browser tab and search results -- update the name if this isn't your site. -->
-<title>Abdul Samad — Portfolio</title>
+<title>Rizqi Romadhon — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Caveat:wght@500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
@@ -35,8 +35,8 @@
 -->
 <header class="navbar">
   <div class="container navbar-inner">
-    <!-- "AS" = initials. Swap for your own initials or a text/image logo. -->
-    <a href="#home" class="logo">AS<span class="dot">.</span></a>
+    <!-- "RR" = initials. Swap for your own initials or a text/image logo. -->
+    <a href="#home" class="logo">RR<span class="dot">.</span></a>
     <nav class="nav-links">
       <a class="nav-link" href="#home">Home</a>
       <a class="nav-link" href="#about">About</a>
@@ -60,10 +60,6 @@
   data-section on each <a> must match the section's id="..." below.
 -->
 <nav class="scroll-nav" aria-label="Section navigation">
-  <div class="scroll-nav-rail">
-    <!-- Height of this bar is set by script.js as you scroll, to show reading progress. -->
-    <div class="scroll-nav-progress" id="scrollProgress"></div>
-  </div>
   <ul class="scroll-nav-list">
     <li><a href="#home" class="scroll-nav-item" data-section="home">
       <span class="scroll-nav-num">01</span>
@@ -91,6 +87,10 @@
       <span class="scroll-nav-dot"></span>
     </a></li>
   </ul>
+  <div class="scroll-nav-rail">
+    <!-- Height of this bar is set by script.js as you scroll, to show reading progress. -->
+    <div class="scroll-nav-progress" id="scrollProgress"></div>
+  </div>
 </nav>
 
 <!--
@@ -104,18 +104,21 @@
 <div class="hero container">
   <div class="hero-text">
     <p class="eyebrow">HI, I'M</p>
-    <h1 class="hero-name">Abdul Samad</h1>
+    <h1 class="hero-name">Rizqi Romadhon</h1>
     <p class="hero-tagline">
-      I design and build mechatronic systems that are
+      I lead people, building system that are
       <span class="text-sky">precise, reliable</span> and
-      <span class="text-pink">production-ready.</span>
+      <span class="text-pink">goal-driven.</span>
     </p>
     <p class="hero-desc">
-      A mechatronics &amp; production engineer who loves turning ideas into
-      real-world automated systems. I focus on designing reliable
-      mechanisms, integrating control systems, and optimizing
-      manufacturing processes.
+      Production Manager in glass manufacturing. I lead teams 
+      and refine processes based on PDCA cycle, building systems that turn complex 
+      operations into consistent results.
+      <br>
+      Having bacground in mechatronics engineering and interest on physics allow me 
+      to deliver solutions to enhance production process.
     </p>
+    
 
     <div class="hero-actions">
       <a class="btn btn-primary btn-pill" href="#projects">
@@ -130,23 +133,18 @@
     </div>
 
     <p class="connect-label">LET'S CONNECT</p>
-    <!--
-      Social icon row. href="#" is a placeholder -- replace with your
-      real GitHub/LinkedIn/Instagram profile URLs, and swap
-      you@example.com for your real email. This exact same row is
-      repeated in the CONTACT section below; keep both in sync.
-    -->
+    <!--connect to the social media-->
     <div class="social-row">
-      <a href="#" class="social-btn" aria-label="GitHub">
+      <a href="https://id.quora.com/profile/Rizqi-Romadhon" target="_blank" class="social-btn" aria-label="Quora">
         <svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
       </a>
-      <a href="#" class="social-btn" aria-label="LinkedIn">
+      <a href="http://www.linkedin.com/in/rizqi-romadhon-4763a81a4" target="_blank" class="social-btn" aria-label="LinkedIn">
         <svg class="icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
       </a>
-      <a href="#" class="social-btn" aria-label="Instagram">
+      <a href="https://www.instagram.com/rizqi_ro/" target="_blank" class="social-btn" aria-label="Instagram">
         <svg class="icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
       </a>
-      <a href="mailto:you@example.com" class="social-btn" aria-label="Email">
+      <a href="mailto:rizqi-romadhon@outlook.com" class="social-btn" aria-label="Email">
         <svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16v16H4zM22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
       </a>
     </div>
@@ -167,14 +165,12 @@
     <div class="focus-card">
       <p class="focus-label">FOCUSED ON</p>
       <ul class="focus-list">
-        <li><svg class="icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="12" cy="12" r="1.6" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 2v3M12 19v3M22 12h-3M5 12H2M19.07 4.93l-2.12 2.12M7.05 16.95l-2.12 2.12M19.07 19.07l-2.12-2.12M7.05 7.05L4.93 4.93" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Mechanical Design (CAD)</li>
+        <li><svg class="icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="12" cy="12" r="1.6" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 2v3M12 19v3M22 12h-3M5 12H2M19.07 4.93l-2.12 2.12M7.05 16.95l-2.12 2.12M19.07 19.07l-2.12-2.12M7.05 7.05L4.93 4.93" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Manufacturing process</li>
         <li><svg class="icon-sm" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M9 2v3M12 2v3M15 2v3M9 19v3M12 19v3M15 19v3M2 9h3M2 12h3M2 15h3M19 9h3M19 12h3M19 15h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Automation &amp; Controls</li>
         <li><svg class="icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 13L16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 3h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Process Optimization</li>
         <li><svg class="icon-sm" viewBox="0 0 24 24"><polygon points="12,3 19,7.5 19,16.5 12,21 5,16.5 5,7.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>Electro-Mechanical Systems</li>
       </ul>
     </div>
-
-    <p class="handwritten">Always learning,<br />always engineering.</p>
   </div>
 </div>
 </section>
@@ -195,13 +191,11 @@
         <span class="text-indigo">Problem solver.</span>
       </h2>
       <p class="about-desc">
-        I enjoy building systems that move, sense, and automate the
-        physical world. From CAD design to control logic and process
-        improvement — I love the entire journey from concept to
-        production floor.
+        I enjoy building systems which driven by factual data on the field that enable people to work and take action based on a clear and concise instruction without any bias.
+        Reducing the risk of failure, improve the whole process and drive better results towards the company's goals.
       </p>
       <a class="btn btn-outline-dark btn-pill" href="#contact">
-        Get In Touch
+        Contact me
         <svg class="icon" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
@@ -210,27 +204,27 @@
     <div class="stat-grid">
       <div class="stat-card">
         <p class="card-label">Experience</p>
-        <p class="stat-value">1+</p>
+        <p class="stat-value">10+</p>
         <p class="stat-sub">Years</p>
         <p class="card-desc">Building systems &amp; solving production problems</p>
       </div>
       <div class="stat-card">
         <p class="card-label">Projects</p>
-        <p class="stat-value">15+</p>
+        <p class="stat-value">12+</p>
         <p class="stat-sub">Completed</p>
-        <p class="card-desc">Automation, CAD &amp; process-improvement projects</p>
+        <p class="card-desc">Cost Reduction &amp;  Process-improvement projects</p>
       </div>
       <div class="stat-card">
-        <p class="card-label">Focus</p>
+        <p class="card-label">Interest</p>
         <div class="card-icon"><svg class="icon-sm" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M9 2v3M12 2v3M15 2v3M9 19v3M12 19v3M15 19v3M2 9h3M2 12h3M2 15h3M19 9h3M19 12h3M19 15h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-        <p class="card-title">Mechatronics &amp; Automation</p>
-        <p class="card-desc">CAD, PLC programming &amp; controls</p>
+        <p class="card-title">Science &amp; Engineering</p>
+        <p class="card-desc">Physics, CAD &amp; Mechatronics engineering</p>
       </div>
       <div class="stat-card">
         <p class="card-label">Currently</p>
         <div class="card-icon"><svg class="icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 13L16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 3h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-        <p class="card-title">Continuous Improvement</p>
-        <p class="card-desc">Lean, Six Sigma &amp; new automation tech</p>
+        <p class="card-title">Production Manager</p>
+        <p class="card-desc">Lean, Six Sigma &amp; People and Process enhancement</p>
       </div>
     </div>
 
@@ -280,10 +274,10 @@
         <span class="credential-badge">VERIFIED</span>
       </div>
       <div>
-        <h3 class="credential-title">Certified SolidWorks Associate (CSWA)</h3>
-        <p class="credential-issuer">Dassault Systèmes · SolidWorks</p>
+        <h3 class="credential-title">Certified CAD 2D and 3D modelling</h3>
+        <p class="credential-issuer">BBPLK Bandung · Autodesk Inventor</p>
       </div>
-      <p class="credential-meta">Issued Jan 2024 · Credential ID CSWA-01234</p>
+      <p class="credential-meta">Issued August 2014 · Credential 2095/BBPLKDN/VII/2014</p>
       <a href="#" class="credential-link" target="_blank" rel="noopener noreferrer">
         View Credential
         <svg class="icon-sm" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -299,9 +293,27 @@
       </div>
       <div>
         <h3 class="credential-title">Lean Six Sigma Green Belt</h3>
-        <p class="credential-issuer">ASQ · American Society for Quality</p>
+        <p class="credential-issuer">Six Sigma · Academy Amsterdam</p>
       </div>
-      <p class="credential-meta">Issued Aug 2023 · Credential ID LSSGB-98765</p>
+      <p class="credential-meta">Issued June 2023 · Credential 95589197-7180-422c-ab04-74e6631027dd</p>
+      <a href="#" class="credential-link" target="_blank" rel="noopener noreferrer">
+        View Credential
+        <svg class="icon-sm" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </article>
+
+        <article class="credential-card">
+      <div class="credential-top">
+        <div class="credential-icon">
+          <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 13L16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 3h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <span class="credential-badge">VERIFIED</span>
+      </div>
+      <div>
+        <h3 class="credential-title">Lean Six Sigma Black Belt</h3>
+        <p class="credential-issuer">Six Sigma · Academy Amsterdam</p>
+      </div>
+      <p class="credential-meta">Issued July 2023 · Credential 97106a72-9e0f-4955-a934-bf35c59b87d4</p>
       <a href="#" class="credential-link" target="_blank" rel="noopener noreferrer">
         View Credential
         <svg class="icon-sm" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -316,10 +328,28 @@
         <span class="credential-badge">VERIFIED</span>
       </div>
       <div>
-        <h3 class="credential-title">TIA Portal · PLC Programming Certificate</h3>
-        <p class="credential-issuer">Siemens</p>
+        <h3 class="credential-title">Unit Head · Certificate of Promotion</h3>
+        <p class="credential-issuer">Asahimas . AGC Group Asia Pacific</p>
       </div>
-      <p class="credential-meta">Issued Mar 2023 · Credential ID SIE-PLC-45210</p>
+      <p class="credential-meta">Issued April 2020 · Credential ID 545/HR&IR-FG.CKP/IV/2020</p>
+      <a href="#" class="credential-link" target="_blank" rel="noopener noreferrer">
+        View Credential
+        <svg class="icon-sm" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </article>
+
+        <article class="credential-card">
+      <div class="credential-top">
+        <div class="credential-icon">
+          <svg class="icon" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M9 2v3M12 2v3M15 2v3M9 19v3M12 19v3M15 19v3M2 9h3M2 12h3M2 15h3M19 9h3M19 12h3M19 15h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <span class="credential-badge">VERIFIED</span>
+      </div>
+      <div>
+        <h3 class="credential-title">Section Chief · Certificate of Promotion</h3>
+        <p class="credential-issuer">Asahimas . AGC Group Asia Pacific</p>
+      </div>
+      <p class="credential-meta">Issued April 2022 · Credential ID 231/HR&IR-FG.CKP/IV/2022</p>
       <a href="#" class="credential-link" target="_blank" rel="noopener noreferrer">
         View Credential
         <svg class="icon-sm" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -334,21 +364,69 @@
         <span class="credential-badge">VERIFIED</span>
       </div>
       <div>
-        <h3 class="credential-title">Lean Manufacturing Professional Certificate</h3>
-        <p class="credential-issuer">Lean Six Sigma Institute</p>
+        <h3 class="credential-title">Research and Development Internship  </h3>
+        <p class="credential-issuer">Patria . United Tractor Pandu Engineering</p>
       </div>
-      <p class="credential-meta">Issued Nov 2022 · Credential ID LMP-33221</p>
+      <p class="credential-meta">Issued January 2016</p>
       <a href="#" class="credential-link" target="_blank" rel="noopener noreferrer">
         View Credential
         <svg class="icon-sm" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </article>
 
-    <!-- Add real, additional certifications above this card. -->
-    <div class="credentials-add-card">
-      <svg class="icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-      <p>Add your next certification here — copy a card above and update the details.</p>
-    </div>
+        <article class="credential-card">
+      <div class="credential-top">
+        <div class="credential-icon">
+          <svg class="icon" viewBox="0 0 24 24"><polygon points="12,3 19,7.5 19,16.5 12,21 5,16.5 5,7.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+        </div>
+        <span class="credential-badge">VERIFIED</span>
+      </div>
+      <div>
+        <h3 class="credential-title">Glass Manufacturing Training</h3>
+        <p class="credential-issuer">KCC Glass Corporation</p>
+      </div>
+      <p class="credential-meta">Issued November 2023</p>
+      <a href="#" class="credential-link" target="_blank" rel="noopener noreferrer">
+        View Credential
+        <svg class="icon-sm" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </article>
+
+            <article class="credential-card">
+      <div class="credential-top">
+        <div class="credential-icon">
+          <svg class="icon" viewBox="0 0 24 24"><polygon points="12,3 19,7.5 19,16.5 12,21 5,16.5 5,7.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+        </div>
+        <span class="credential-badge">VERIFIED</span>
+      </div>
+      <div>
+        <h3 class="credential-title">Complete Flutter App Development Bootcamp</h3>
+        <p class="credential-issuer">Dr Angela Yu . Udemy</p>
+      </div>
+      <p class="credential-meta">Issued January 2020 . Credential ID UC-3M64K25G</p>
+      <a href="#" class="credential-link" target="_blank" rel="noopener noreferrer">
+        View Credential
+        <svg class="icon-sm" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </article>
+
+            <article class="credential-card">
+      <div class="credential-top">
+        <div class="credential-icon">
+          <svg class="icon" viewBox="0 0 24 24"><polygon points="12,3 19,7.5 19,16.5 12,21 5,16.5 5,7.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+        </div>
+        <span class="credential-badge">VERIFIED</span>
+      </div>
+      <div>
+        <h3 class="credential-title">Complete Full-Stack Web Development Bootcamp</h3>
+        <p class="credential-issuer">Dr Angela Yu . Udemy</p>
+      </div>
+      <p class="credential-meta">Issued September 2026</p>
+      <a href="#" class="credential-link" target="_blank" rel="noopener noreferrer">
+        View Credential
+        <svg class="icon-sm" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </article>
 
   </div>
 </section>
@@ -489,8 +567,8 @@
 <!-- FOOTER -- update the year/name in the copyright line as needed. -->
 <footer class="footer">
   <div class="container footer-inner">
-    <div class="logo">AS<span class="dot">.</span></div>
-    <p>© 2024 Abdul Samad. All rights reserved.</p>
+    <div class="logo">RR<span class="dot">.</span></div>
+    <p>© 2024 Rizqi Romadhon. All rights reserved.</p>
     <p>Built with <span class="heart">♥</span> and a lot of torque 🔧</p>
   </div>
 </footer>
