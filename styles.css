@@ -54,6 +54,12 @@ body {
   flex-shrink: 0;
 }
 
+.icon-lg {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
 /* ===================== BUTTONS ===================== */
 /* Base .btn style, then .btn-pill/.btn-primary/.btn-outline/etc. mix in shape + color variants. */
 .btn {
@@ -183,7 +189,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("hero-bg.svg") center/cover no-repeat;
+  background: url("images/hero-bg.svg") center/cover no-repeat;
   opacity: 0.16;
   z-index: 0;
 }
@@ -489,15 +495,35 @@ body {
   margin-bottom: 4px;
 }
 
-.about-image {
+/* ----- About photo carousel -----
+   A stack of slides (.carousel-slide), only one visible at a time via
+   .carousel-track's transform (set by script.js). Each slide holds a
+   real <img> on top of a dashed placeholder -- if the img 404s, its
+   onerror hides it and the placeholder shows through underneath, so the
+   carousel works before you've dropped in any photos. */
+.about-carousel {
+  position: relative;
   border-radius: 16px;
   overflow: hidden;
   aspect-ratio: 4/5;
   background: linear-gradient(135deg, #164e63, #18181b 60%, #000);
-  position: relative;
 }
 
-.about-photo {
+.carousel-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s ease;
+}
+
+.carousel-slide {
+  position: relative;
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-photo {
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -506,25 +532,301 @@ body {
   object-fit: cover;
 }
 
-.about-image-lines {
+.carousel-placeholder {
   position: absolute;
-  inset: 0;
+  inset: 12px;
+  z-index: 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 0 24px;
+  text-align: center;
+  color: rgba(224, 231, 255, 0.55);
+  border: 1.5px dashed rgba(224, 231, 255, 0.3);
+  border-radius: 12px;
 }
 
-.about-image-lines span {
-  height: 6px;
-  border-radius: 999px;
-  background: rgba(34, 211, 238, 0.3);
+.carousel-placeholder .icon-lg {
+  color: rgba(224, 231, 255, 0.4);
+}
+
+.carousel-placeholder p {
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.carousel-placeholder span {
   display: block;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10px;
+  color: rgba(224, 231, 255, 0.35);
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(9, 9, 11, 0.55);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.carousel-btn:hover {
+  background: rgba(9, 9, 11, 0.85);
+}
+.carousel-prev { left: 12px; }
+.carousel-next { right: 12px; }
+
+.carousel-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.carousel-dot {
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.carousel-dot.active {
+  background: #fff;
+  width: 20px;
+  border-radius: 999px;
 }
 
 @media (max-width: 900px) {
   .about-grid { grid-template-columns: 1fr; }
+}
+
+/* ===================== CAREER & EDUCATION ===================== */
+.career-section {
+  padding: 80px 24px;
+}
+
+.career-header {
+  margin-bottom: 40px;
+}
+
+.career-title {
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.career-desc {
+  color: var(--zinc-400);
+  font-size: 14px;
+  max-width: 460px;
+}
+
+.career-grid {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .career-grid { grid-template-columns: 1fr; }
+}
+
+/* ----- Timeline ----- */
+.timeline {
+  list-style: none;
+  position: relative;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 20px;
+}
+
+.timeline-marker {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+/* The connecting vertical line, drawn behind the dot on every item
+   except the last (so it doesn't dangle past the final entry). */
+.timeline-item:not(:last-child) .timeline-marker::after {
+  content: "";
+  position: absolute;
+  top: 40px;
+  bottom: -32px;
+  width: 2px;
+  background: var(--zinc-800);
+}
+
+.timeline-dot {
+  position: relative;
+  z-index: 1;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background: var(--zinc-900);
+  border: 1px solid var(--zinc-700);
+  color: var(--indigo-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.timeline-item:first-child .timeline-dot {
+  background: linear-gradient(135deg, rgba(129,140,248,0.25), rgba(232,121,249,0.25));
+  border-color: var(--indigo-light);
+  box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.12);
+}
+
+.timeline-content {
+  padding-bottom: 40px;
+}
+
+.timeline-period {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--sky);
+  margin-bottom: 8px;
+}
+
+.timeline-role {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.timeline-company {
+  font-size: 13px;
+  color: var(--zinc-400);
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+
+.timeline-scope {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.timeline-scope li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 13px;
+  color: var(--zinc-400);
+  line-height: 1.6;
+}
+
+.timeline-scope li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  background: var(--indigo-light);
+}
+
+.timeline-achievements {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.achievement-chip {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gold);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  background: rgba(251, 191, 36, 0.08);
+  border-radius: 999px;
+  padding: 6px 12px;
+  line-height: 1.3;
+}
+
+/* ----- Education ----- */
+.education-list {
+  position: sticky;
+  top: 32px;
+}
+
+.education-label {
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: var(--zinc-500);
+  margin-bottom: 16px;
+}
+
+.education-card {
+  background: var(--zinc-900);
+  border: 1px solid var(--zinc-800);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.education-icon {
+  height: 44px;
+  width: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(129,140,248,0.18), rgba(232,121,249,0.18));
+  color: var(--indigo-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.education-degree {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 6px;
+}
+
+.education-school {
+  font-size: 13px;
+  color: var(--zinc-300);
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.education-years {
+  font-size: 12px;
+  color: var(--zinc-500);
+  margin-bottom: 12px;
+}
+
+.education-card .card-desc {
+  color: var(--zinc-500);
+}
+
+@media (max-width: 900px) {
+  .education-list { position: static; }
 }
 
 /* ===================== CREDENTIALS / CERTIFICATIONS ===================== */
@@ -641,6 +943,12 @@ body {
   align-items: center;
   gap: 6px;
   transition: gap 0.2s ease;
+  /* This is a <button> (opens the credential modal, no page navigation) styled to look like the text link it used to be. */
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  cursor: pointer;
 }
 .credential-link:hover {
   gap: 10px;
@@ -1049,4 +1357,139 @@ body {
 
 @media (max-width: 900px) {
   .scroll-nav { display: none; }
+}
+
+/* ---------------------------------------------------------
+   Credential modal
+   The pop-up opened by a "View Credential" button instead of
+   navigating away -- see the CREDENTIAL MODAL markup near the end of
+   index.html and the openCertModal()/closeCertModal() logic in
+   script.js. Hidden by default via the `hidden` attribute; JS toggles
+   that off/on and adds/removes .open for the fade/scale transition.
+--------------------------------------------------------- */
+.cert-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.cert-modal[hidden] {
+  display: none;
+}
+
+.cert-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(9, 9, 11, 0.8);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.cert-modal-dialog {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 560px;
+  background: var(--zinc-900);
+  border: 1px solid var(--zinc-800);
+  border-radius: 20px;
+  padding: 20px;
+  opacity: 0;
+  transform: translateY(12px) scale(0.98);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.cert-modal.open .cert-modal-backdrop {
+  opacity: 1;
+}
+
+.cert-modal.open .cert-modal-dialog {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.cert-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--zinc-700);
+  background: var(--zinc-900);
+  color: var(--zinc-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.cert-modal-close:hover {
+  color: #fff;
+  border-color: var(--zinc-500);
+}
+
+.cert-modal-image-wrap {
+  position: relative;
+  aspect-ratio: 4/3;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--zinc-950);
+  margin-bottom: 16px;
+}
+
+.cert-modal-image {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #fff;
+}
+
+.cert-modal-placeholder {
+  position: absolute;
+  inset: 12px;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  color: var(--zinc-500);
+  border: 1.5px dashed var(--zinc-700);
+  border-radius: 10px;
+}
+
+.cert-modal-placeholder .icon-lg {
+  color: var(--zinc-600);
+}
+
+.cert-modal-placeholder p {
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 0 16px;
+}
+
+.cert-modal-placeholder span {
+  display: block;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--zinc-600);
+  word-break: break-all;
+}
+
+.cert-modal-title {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  padding: 0 32px;
 }
