@@ -830,16 +830,7 @@ body {
 }
 
 /* ===================== CREDENTIALS / CERTIFICATIONS ===================== */
-/* Same white "island" treatment as ABOUT, but rounded on all four
-   corners (not just the top) since it sits between two dark sections
-   -- Career above, Projects below -- instead of hanging off the Hero. */
 .credentials-section {
-  background: #fafafa;
-  color: #18181b;
-  border-radius: 40px;
-}
-
-.credentials-inner {
   padding: 80px 24px;
 }
 
@@ -859,7 +850,7 @@ body {
 }
 
 .credentials-desc {
-  color: var(--zinc-500);
+  color: var(--zinc-400);
   font-size: 14px;
   max-width: 420px;
 }
@@ -875,18 +866,17 @@ body {
 }
 
 .credential-card {
-  background: #fff;
-  border: 1px solid #e4e4e7;
+  background: var(--zinc-900);
+  border: 1px solid var(--zinc-800);
   border-radius: 16px;
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 14px;
-  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 .credential-card:hover {
-  border-color: #d4d4d8;
-  box-shadow: 0 8px 24px rgba(24, 24, 27, 0.06);
+  border-color: var(--zinc-700);
   transform: translateY(-2px);
 }
 
@@ -901,8 +891,8 @@ body {
   height: 44px;
   width: 44px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #eef2ff, #fdf4ff);
-  color: var(--indigo);
+  background: linear-gradient(135deg, rgba(129,140,248,0.18), rgba(232,121,249,0.18));
+  color: var(--indigo-light);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -932,7 +922,7 @@ body {
 
 .credential-issuer {
   font-size: 13px;
-  color: var(--zinc-500);
+  color: var(--zinc-300);
   font-weight: 500;
 }
 
@@ -945,7 +935,7 @@ body {
 .credential-link {
   margin-top: auto;
   align-self: flex-start;
-  color: var(--indigo);
+  color: var(--indigo-light);
   font-size: 13px;
   font-weight: 500;
   text-decoration: none;
@@ -965,7 +955,7 @@ body {
 }
 
 .credentials-add-card {
-  border: 1.5px dashed #d4d4d8;
+  border: 1px dashed var(--zinc-700);
   border-radius: 16px;
   padding: 24px;
   display: flex;
@@ -980,7 +970,7 @@ body {
 .credentials-add-card .icon {
   width: 24px;
   height: 24px;
-  color: var(--zinc-400);
+  color: var(--zinc-600);
 }
 .credentials-add-card p {
   font-size: 12px;
