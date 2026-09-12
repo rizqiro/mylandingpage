@@ -620,7 +620,35 @@ body {
 
 /* ===================== CAREER & EDUCATION ===================== */
 .career-section {
-  padding: 80px 24px;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0;
+}
+
+/* Faint blueprint texture behind the section, same technique as the
+   Hero (career-bg.svg instead of hero-bg.svg) -- a gear/mechanism
+   motif plus an ascending step-path standing in for career growth. */
+.career-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("images/career-bg.svg") center/cover no-repeat;
+  opacity: 0.16;
+  z-index: 0;
+}
+
+.career-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.75) 55%, #000 100%);
+  z-index: 0;
+}
+
+.career-section > .container {
+  position: relative;
+  z-index: 1;
 }
 
 .career-header {
@@ -838,9 +866,38 @@ body {
    shade lighter again (var(--zinc-800) vs. the section's zinc-950) so
    they still read as raised panels instead of blending into the band. */
 .credentials-section {
+  position: relative;
+  overflow: hidden;
   background: var(--zinc-950);
   border-radius: 40px;
   padding: 80px 0;
+}
+
+/* Same faint blueprint technique as the Hero (credentials-bg.svg) --
+   a medallion/seal motif, tinted violet to set this band apart from
+   Career's and Projects'. Slightly lower opacity than the others since
+   it's layered over zinc-950 rather than pure black. */
+.credentials-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("images/credentials-bg.svg") center/cover no-repeat;
+  opacity: 0.14;
+  z-index: 0;
+}
+
+.credentials-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(9,9,11,0.55) 0%, rgba(9,9,11,0.75) 55%, var(--zinc-950) 100%);
+  z-index: 0;
+}
+
+.credentials-section > .container {
+  position: relative;
+  z-index: 1;
 }
 
 .credentials-header {
@@ -989,7 +1046,34 @@ body {
 
 /* ===================== PROJECTS ===================== */
 .projects-section {
-  padding: 80px 24px;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0;
+}
+
+/* Same faint blueprint technique as the Hero (projects-bg.svg) -- a
+   jointed robotic-arm + PCB-trace motif, tinted teal. */
+.projects-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("images/projects-bg.svg") center/cover no-repeat;
+  opacity: 0.16;
+  z-index: 0;
+}
+
+.projects-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.75) 55%, #000 100%);
+  z-index: 0;
+}
+
+.projects-section > .container {
+  position: relative;
+  z-index: 1;
 }
 
 .projects-header {
@@ -1108,6 +1192,41 @@ body {
 }
 
 /* ===================== CONTACT ===================== */
+/* The outer <section class="contact-wrap"> wraps the page-header and
+   contact-section blocks below, both already full-bleed with no
+   "container" class merged onto the section itself -- so, unlike
+   Career/Credentials/Projects, no extra restructuring was needed to
+   give it a full-width blueprint background (contact-bg.svg), same
+   technique as the Hero -- a radar/location-pin motif. */
+.contact-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("images/contact-bg.svg") center/cover no-repeat;
+  opacity: 0.16;
+  z-index: 0;
+}
+
+.contact-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.75) 55%, #000 100%);
+  z-index: 0;
+}
+
+.contact-wrap > .page-header,
+.contact-wrap > .contact-section {
+  position: relative;
+  z-index: 1;
+}
+
 .contact-section {
   padding: 48px 24px 80px;
 }

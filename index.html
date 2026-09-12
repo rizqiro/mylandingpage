@@ -301,8 +301,13 @@
   Left: a vertical timeline of your work history, newest first. Right:
   education. Each timeline item is one .timeline-item -- copy one to add
   a role, or edit the text in place to update yours.
+
+  Full-width outer <section> (so its faint blueprint background in
+  styles.css spans edge to edge, same technique as HERO) wrapping an
+  inner .container that caps the actual content at 1200px.
 -->
-<section class="career-section container" id="career">
+<section class="career-section" id="career">
+<div class="container">
   <div class="career-header">
     <div>
       <p class="eyebrow">MY JOURNEY</p>
@@ -424,6 +429,7 @@
       </div>
     </div>
   </div>
+</div>
 </section>
 
 <!--
@@ -634,8 +640,12 @@
      .mock-app (see the "Line OEE Dashboard" card for that pattern).
      Swap in a real screenshot/image if you have one instead.
   3. Update .project-name and the .tag (tech stack) pills in .tag-row.
+
+  Same full-width outer <section> + inner .container split as Career,
+  so the blueprint background in styles.css spans edge to edge.
 -->
-<section class="projects-section container" id="projects">
+<section class="projects-section" id="projects">
+<div class="container">
   <div class="projects-header">
     <div>
       <p class="eyebrow">MY WORK</p>
@@ -689,6 +699,7 @@
       </div>
     </article>
   </div>
+</div>
 </section>
 
 <!-- CONTACT -->
