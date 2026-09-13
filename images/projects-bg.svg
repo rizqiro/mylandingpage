@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
-<rect width="1600" height="900" fill="#081a17"/>
-<g stroke="#dcfff2" stroke-width="1" opacity="0.5">
+<rect width="1600" height="900" fill="#120a2e"/>
+<g stroke="#b8c2ff" stroke-width="1" opacity="0.6">
 <line x1="0" y1="0" x2="0" y2="900"/>
 <line x1="40" y1="0" x2="40" y2="900"/>
 <line x1="80" y1="0" x2="80" y2="900"/>
@@ -66,7 +66,7 @@
 <line x1="0" y1="840" x2="1600" y2="840"/>
 <line x1="0" y1="880" x2="1600" y2="880"/>
 </g>
-<g stroke="#dcfff2" stroke-width="1.6" opacity="0.7">
+<g stroke="#b8c2ff" stroke-width="1.6" opacity="0.85">
 <line x1="0" y1="0" x2="0" y2="900"/>
 <line x1="160" y1="0" x2="160" y2="900"/>
 <line x1="320" y1="0" x2="320" y2="900"/>
@@ -84,4 +84,4 @@
 <line x1="0" y1="480" x2="1600" y2="480"/>
 <line x1="0" y1="640" x2="1600" y2="640"/>
 <line x1="0" y1="800" x2="1600" y2="800"/>
-</g><g fill="none" stroke="#dcfff2" stroke-width="3" opacity="0.85"><path d="M 1300.0,820.0 L 1300.0,660.0 L 1140.0,560.0 L 1220.0,420.0 L 1380.0,380.0"/><circle cx="1300" cy="820" r="12"/><circle cx="1300" cy="660" r="12"/><circle cx="1140" cy="560" r="12"/><circle cx="1220" cy="420" r="12"/><circle cx="1380" cy="380" r="12"/><path d="M 1380,380 L 1430,350 M 1380,380 L 1420,410"/><rect x="1250" y="800" width="100" height="40" rx="6"/></g><g fill="none" stroke="#dcfff2" stroke-width="2.5" opacity="0.75"><path d="M 60.0,780.0 L 60.0,700.0 L 140.0,700.0 L 140.0,620.0 L 260.0,620.0 L 260.0,540.0"/><circle cx="60" cy="780" r="6" fill="#dcfff2"/><circle cx="60" cy="700" r="6" fill="#dcfff2"/><circle cx="140" cy="700" r="6" fill="#dcfff2"/><circle cx="140" cy="620" r="6" fill="#dcfff2"/><circle cx="260" cy="620" r="6" fill="#dcfff2"/><circle cx="260" cy="540" r="6" fill="#dcfff2"/><rect x="20" y="500" width="280" height="180" rx="4"/></g><g stroke="#dcfff2" stroke-width="1.4" opacity="0.6"><line x1="800" y1="100" x2="800" y2="800" stroke-dasharray="30 10 4 10"/><line x1="1120" y1="860" x2="1430" y2="860"/><line x1="1120" y1="848" x2="1120" y2="872"/><line x1="1430" y1="848" x2="1430" y2="872"/></g></svg>
+</g><g fill="none" stroke="#b8c2ff" stroke-width="3" opacity="0.95"><path d="M 1300.0,820.0 L 1300.0,660.0 L 1140.0,560.0 L 1220.0,420.0 L 1380.0,380.0"/><circle cx="1300" cy="820" r="12"/><circle cx="1300" cy="660" r="12"/><circle cx="1140" cy="560" r="12"/><circle cx="1220" cy="420" r="12"/><circle cx="1380" cy="380" r="12"/><path d="M 1380,380 L 1430,350 M 1380,380 L 1420,410"/><rect x="1250" y="800" width="100" height="40" rx="6"/></g><g fill="none" stroke="#b8c2ff" stroke-width="2.5" opacity="0.9"><path d="M 60.0,780.0 L 60.0,700.0 L 140.0,700.0 L 140.0,620.0 L 260.0,620.0 L 260.0,540.0"/><circle cx="60" cy="780" r="6" fill="#b8c2ff"/><circle cx="60" cy="700" r="6" fill="#b8c2ff"/><circle cx="140" cy="700" r="6" fill="#b8c2ff"/><circle cx="140" cy="620" r="6" fill="#b8c2ff"/><circle cx="260" cy="620" r="6" fill="#b8c2ff"/><circle cx="260" cy="540" r="6" fill="#b8c2ff"/><rect x="20" y="500" width="280" height="180" rx="4"/></g><g stroke="#b8c2ff" stroke-width="1.4" opacity="0.75"><line x1="800" y1="100" x2="800" y2="800" stroke-dasharray="30 10 4 10"/><line x1="1120" y1="860" x2="1430" y2="860"/><line x1="1120" y1="848" x2="1120" y2="872"/><line x1="1430" y1="848" x2="1430" y2="872"/></g></svg>
