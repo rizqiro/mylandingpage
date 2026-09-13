@@ -30,8 +30,7 @@ then open `http://localhost:8000`.
   a `<symbol>` and referenced from `index.html` via `<use>` instead of
   being pasted inline everywhere.
 - `images/` — background art and photos:
-  - `images/grid-bg.svg` — the blueprint-grid texture shared by every
-    dark section (Hero, Career, Credentials, Projects, Contact).
+  - `images/hero-bg.svg` — the faint blueprint-grid texture behind the hero.
   - `images/profile-photo.png` — the hero portrait.
   - `images/about/` — the About section's photo carousel slides.
   - `images/credentials/` — certificate images shown in the credential pop-up.
@@ -73,36 +72,15 @@ works; `<img>`'s `onerror` hides it gracefully if the file is missing,
 showing the navy gradient box instead).
 
 The whole hero section also has a blueprint-grid texture behind it
-(`images/grid-bg.svg`, set via `.hero-section::before` in `styles.css`,
-with an indigo/pink glow layered on top via `::after`) — see "Every
-dark section shares one grid background" below for the full picture,
-since Career, Credentials, Projects, and Contact all use the same file.
-
-### Every dark section shares one grid background
-
-Hero, Career & Education, Credentials, Projects, and Contact all use
-the same `images/grid-bg.svg` — a plain blueprint grid (fine 40px lines
-+ bold 160px lines) on a dark indigo fill, no decorative artwork on top
-of it, kept deliberately simple. Each section still layers its own
-`::before` (the grid image, `opacity` 0.3–0.34) and `::after` (an
-indigo/pink radial glow — the same `--indigo`/`--pink` used in
-`.btn-primary` and `.portrait-glow` — blended with a dark linear fade
-for text contrast) in `styles.css`, so opacity/glow can be tuned per
-section even though the underlying image is shared.
-
-To change the grid everywhere at once, replace `images/grid-bg.svg`
-(any image works). To change just one section, point that section's
-`::before` at a different file in `styles.css` instead.
-
-To add this treatment to a section that doesn't have it yet: the
-section needs its own full-bleed `<section>` (no `container` class
-merged onto the section tag itself — see the CAREER or PROJECTS markup
-in `index.html` for the pattern: an outer `<section>` wrapping an inner
-`<div class="container">`), then in `styles.css` give the outer section
-`position: relative; overflow: hidden;`, a `::before` with the image
-and `opacity: 0.16`, a `::after` dark gradient fading to that section's
-own background color, and `position: relative; z-index: 1;` on the
-inner `.container` so its content stacks above both pseudo-elements.
+(`images/hero-bg.svg`, set via `.hero-section::before` in `styles.css`) —
+a grid at ~34% opacity with an indigo/pink radial glow layered on top
+via `::after` (the same `--indigo`/`--pink` used in `.btn-primary` and
+`.portrait-glow`, so it reads as part of the palette rather than plain
+grey noise), dark-gradiented underneath so it stays readable. To use a
+different image instead, just point that `background: url(...)` at a
+new file under `images/`. This is the only section with this
+treatment — Career & Education, Credentials, Projects, and Contact all
+use plain solid backgrounds (see their own sections in `styles.css`).
 
 ## About: photo carousel
 
