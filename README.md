@@ -78,6 +78,39 @@ so it reads as background grain rather than a competing visual. To use a
 different image instead, just point that `background: url(...)` at a
 new file under `images/`.
 
+### Every dark section gets its own blueprint
+
+Career & Education, Credentials, Projects, and Contact each get the same
+treatment as the Hero — a faint blueprint-grid texture (`::before`) plus
+a dark gradient fade (`::after`) for readability — but with their own
+SVG file and a motif that fits the section, so they don't feel like the
+same image repeated:
+
+| Section       | File                          | Motif                                  |
+|---------------|-------------------------------|-----------------------------------------|
+| Hero          | `images/hero-bg.svg`          | gears + hex bolt                         |
+| Career        | `images/career-bg.svg`        | gears + an ascending step-path (growth)  |
+| Credentials   | `images/credentials-bg.svg`   | a medallion/seal with ribbon tails       |
+| Projects      | `images/projects-bg.svg`      | a jointed robotic arm + a PCB trace      |
+| Contact       | `images/contact-bg.svg`       | radar rings + a location pin             |
+
+All five share the same 1600×900 blueprint-grid structure (fine 40px
+grid + bold 160px grid + dashed dimension lines) so they read as one
+family — only the background tint and the large foreground motif change
+per section. To swap one out, replace the file at that path (any image
+works, same as the Hero) or point the section's `::before` at a new file
+in `styles.css`.
+
+To add this treatment to a section that doesn't have it yet: the
+section needs its own full-bleed `<section>` (no `container` class
+merged onto the section tag itself — see the CAREER or PROJECTS markup
+in `index.html` for the pattern: an outer `<section>` wrapping an inner
+`<div class="container">`), then in `styles.css` give the outer section
+`position: relative; overflow: hidden;`, a `::before` with the image
+and `opacity: 0.16`, a `::after` dark gradient fading to that section's
+own background color, and `position: relative; z-index: 1;` on the
+inner `.container` so its content stacks above both pseudo-elements.
+
 ## About: photo carousel
 
 The About section's right-hand panel (`#aboutCarousel` in `index.html`)
