@@ -30,7 +30,8 @@ then open `http://localhost:8000`.
   a `<symbol>` and referenced from `index.html` via `<use>` instead of
   being pasted inline everywhere.
 - `images/` — background art and photos:
-  - `images/hero-bg.svg` — the faint blueprint-grid texture behind the hero.
+  - `images/grid-bg.svg` — the blueprint-grid texture shared by every
+    dark section (Hero, Career, Credentials, Projects, Contact).
   - `images/profile-photo.png` — the hero portrait.
   - `images/about/` — the About section's photo carousel slides.
   - `images/credentials/` — certificate images shown in the credential pop-up.
@@ -71,35 +72,27 @@ regardless of the photo.
 works; `<img>`'s `onerror` hides it gracefully if the file is missing,
 showing the navy gradient box instead).
 
-The whole hero section also has a faint blueprint-grid texture behind it
-(`images/hero-bg.svg`, set via `.hero-section::before` in `styles.css`) —
-a large ghost gear and grid lines at ~16% opacity, dark-gradiented on top
-so it reads as background grain rather than a competing visual. To use a
-different image instead, just point that `background: url(...)` at a
-new file under `images/`.
+The whole hero section also has a blueprint-grid texture behind it
+(`images/grid-bg.svg`, set via `.hero-section::before` in `styles.css`,
+with an indigo/pink glow layered on top via `::after`) — see "Every
+dark section shares one grid background" below for the full picture,
+since Career, Credentials, Projects, and Contact all use the same file.
 
-### Every dark section gets its own blueprint
+### Every dark section shares one grid background
 
-Career & Education, Credentials, Projects, and Contact each get the same
-treatment as the Hero — a faint blueprint-grid texture (`::before`) plus
-a dark gradient fade (`::after`) for readability — but with their own
-SVG file and a motif that fits the section, so they don't feel like the
-same image repeated:
+Hero, Career & Education, Credentials, Projects, and Contact all use
+the same `images/grid-bg.svg` — a plain blueprint grid (fine 40px lines
++ bold 160px lines) on a dark indigo fill, no decorative artwork on top
+of it, kept deliberately simple. Each section still layers its own
+`::before` (the grid image, `opacity` 0.3–0.34) and `::after` (an
+indigo/pink radial glow — the same `--indigo`/`--pink` used in
+`.btn-primary` and `.portrait-glow` — blended with a dark linear fade
+for text contrast) in `styles.css`, so opacity/glow can be tuned per
+section even though the underlying image is shared.
 
-| Section       | File                          | Motif                                  |
-|---------------|-------------------------------|-----------------------------------------|
-| Hero          | `images/hero-bg.svg`          | gears + hex bolt                         |
-| Career        | `images/career-bg.svg`        | gears + an ascending step-path (growth)  |
-| Credentials   | `images/credentials-bg.svg`   | a medallion/seal with ribbon tails       |
-| Projects      | `images/projects-bg.svg`      | a jointed robotic arm + a PCB trace      |
-| Contact       | `images/contact-bg.svg`       | radar rings + a location pin             |
-
-All five share the same 1600×900 blueprint-grid structure (fine 40px
-grid + bold 160px grid + dashed dimension lines) so they read as one
-family — only the background tint and the large foreground motif change
-per section. To swap one out, replace the file at that path (any image
-works, same as the Hero) or point the section's `::before` at a new file
-in `styles.css`.
+To change the grid everywhere at once, replace `images/grid-bg.svg`
+(any image works). To change just one section, point that section's
+`::before` at a different file in `styles.css` instead.
 
 To add this treatment to a section that doesn't have it yet: the
 section needs its own full-bleed `<section>` (no `container` class
