@@ -830,8 +830,17 @@ body {
 }
 
 /* ===================== CREDENTIALS / CERTIFICATIONS ===================== */
+/* Alternates the black/white rhythm with a dark charcoal band instead
+   of a white one -- a shade lighter than the page's pure-black body
+   (var(--zinc-950) vs. #000), rounded on all four corners since it
+   sits between two pure-black sections (Career, Projects) rather than
+   hanging off the Hero like About does. The cards inside step up one
+   shade lighter again (var(--zinc-800) vs. the section's zinc-950) so
+   they still read as raised panels instead of blending into the band. */
 .credentials-section {
-  padding: 80px 24px;
+  background: var(--zinc-950);
+  border-radius: 40px;
+  padding: 80px 0;
 }
 
 .credentials-header {
@@ -866,8 +875,8 @@ body {
 }
 
 .credential-card {
-  background: var(--zinc-900);
-  border: 1px solid var(--zinc-800);
+  background: var(--zinc-800);
+  border: 1px solid var(--zinc-700);
   border-radius: 16px;
   padding: 24px;
   display: flex;
@@ -876,7 +885,7 @@ body {
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
 .credential-card:hover {
-  border-color: var(--zinc-700);
+  border-color: var(--zinc-500);
   transform: translateY(-2px);
 }
 
