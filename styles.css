@@ -181,18 +181,21 @@ body {
   overflow: hidden;
 }
 
-/* Blueprint texture behind the whole intro -- visible enough to read
-   as a deliberate backdrop in normal room lighting, not just in the
-   dark. Swap hero-bg.svg for any image (a real photo works too)
-   without touching anything else. The ::after glow uses the same
-   indigo/pink the rest of the site already leans on (--indigo,
-   --pink, the .btn-primary gradient, .portrait-glow) so the texture
-   reads as part of the palette instead of plain grey noise. */
+/* Blueprint-grid texture behind the whole intro -- just the grid, no
+   decorative artwork, so it reads as backdrop rather than competing
+   for attention. Shared with every other dark section (see
+   images/grid-bg.svg); swap that file for any image (a real photo
+   works too) to change all of them at once, or point this one
+   section's url() at something else to change only the Hero. The
+   ::after glow uses the same indigo/pink the rest of the site already
+   leans on (--indigo, --pink, the .btn-primary gradient,
+   .portrait-glow) so the texture reads as part of the palette instead
+   of plain grey noise. */
 .hero-section::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("images/hero-bg.svg") center/cover no-repeat;
+  background: url("images/grid-bg.svg") center/cover no-repeat;
   opacity: 0.34;
   z-index: 0;
 }
@@ -630,15 +633,13 @@ body {
   padding: 80px 0;
 }
 
-/* Blueprint texture behind the section, same technique as the Hero
-   (career-bg.svg instead of hero-bg.svg) -- a gear/mechanism motif
-   plus an ascending step-path standing in for career growth. See the
-   Hero's ::after comment for why the glow is indigo/pink. */
+/* Same shared grid-bg.svg texture as the Hero. See the Hero's ::after
+   comment for why the glow is indigo/pink. */
 .career-section::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("images/career-bg.svg") center/cover no-repeat;
+  background: url("images/grid-bg.svg") center/cover no-repeat;
   opacity: 0.34;
   z-index: 0;
 }
@@ -881,15 +882,13 @@ body {
   padding: 80px 0;
 }
 
-/* Same faint blueprint technique as the Hero (credentials-bg.svg) --
-   a medallion/seal motif, tinted violet to set this band apart from
-   Career's and Projects'. Slightly lower opacity than the others since
-   it's layered over zinc-950 rather than pure black. */
+/* Same shared grid-bg.svg texture as the Hero, just a touch lower
+   opacity since it's layered over zinc-950 rather than pure black. */
 .credentials-section::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("images/credentials-bg.svg") center/cover no-repeat;
+  background: url("images/grid-bg.svg") center/cover no-repeat;
   opacity: 0.3;
   z-index: 0;
 }
@@ -1061,13 +1060,12 @@ body {
   padding: 80px 0;
 }
 
-/* Same faint blueprint technique as the Hero (projects-bg.svg) -- a
-   jointed robotic-arm + PCB-trace motif, tinted teal. */
+/* Same shared grid-bg.svg texture as the Hero. */
 .projects-section::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("images/projects-bg.svg") center/cover no-repeat;
+  background: url("images/grid-bg.svg") center/cover no-repeat;
   opacity: 0.34;
   z-index: 0;
 }
@@ -1208,8 +1206,7 @@ body {
    contact-section blocks below, both already full-bleed with no
    "container" class merged onto the section itself -- so, unlike
    Career/Credentials/Projects, no extra restructuring was needed to
-   give it a full-width blueprint background (contact-bg.svg), same
-   technique as the Hero -- a radar/location-pin motif. */
+   give it the same shared grid-bg.svg background as the Hero. */
 .contact-wrap {
   position: relative;
   overflow: hidden;
@@ -1219,7 +1216,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("images/contact-bg.svg") center/cover no-repeat;
+  background: url("images/grid-bg.svg") center/cover no-repeat;
   opacity: 0.34;
   z-index: 0;
 }
