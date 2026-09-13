@@ -1,0 +1,315 @@
+[33mcommit 6cb1ede0f5ee177dd8817edd7628345f43bea27e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mclaude/portfolio-credentials-section-pna5k2[m[33m, [m[1;31morigin/claude/portfolio-credentials-section-pna5k2[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: 4dfd2c9 b6f0783
+Author: Rizqi Romadhon <rizqi-romadhon@outlook.com>
+Date:   Sat Sep 12 23:28:21 2026 +0700
+
+    Merge pull request #3 from rizqiro/claude/sleepy-wright-4bcshk
+    
+    Alternate Credentials section to white theme, matching About
+
+[33mcommit b6f07835cf3ed0fe3f1e6c7d297074708a1b7a27[m[33m ([m[1;31morigin/claude/sleepy-wright-4bcshk[m[33m)[m
+Author: Claude <noreply@anthropic.com>
+Date:   Sat Sep 12 16:19:25 2026 +0000
+
+    Alternate Credentials section to white theme, matching About
+    
+    - Restructure the Credentials section to the same full-width-section
+      + inner .container pattern as About, with background/color/border-radius
+      on the outer <section> so the white "card" can round all four
+      corners (it now sits between two dark sections -- Career and
+      Projects -- rather than just hanging off the Hero like About does).
+    - Add data-theme="light" so the side scroll-nav swaps to its
+      dark-on-light colors while Credentials is in view, same as About.
+    - Retint credential cards/icons/text for readability on white
+      (indigo instead of indigo-light, zinc-500 instead of zinc-300/400).
+    - Career & Education, Projects, Contact and the Footer stay on the
+      dark theme, so the page now alternates black/white through
+      Credentials and then stays dark the rest of the way down.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01KruHDcVDTCUwzC7tmgeMen
+
+[33mcommit 4dfd2c91bf1f7354d94fef722ee73dc712a70f90[m
+Merge: b663c15 93a9472
+Author: Rizqi Romadhon <rizqi-romadhon@outlook.com>
+Date:   Sat Sep 12 14:17:08 2026 +0700
+
+    Merge pull request #2 from rizqiro/claude/sleepy-wright-4bcshk
+    
+    Reorganize icons/images into folders, add photo carousel, career time…
+
+[33mcommit 93a94720ef12578573fff38c61c9e9d50f20fd14[m
+Author: Claude <noreply@anthropic.com>
+Date:   Sat Sep 12 07:12:08 2026 +0000
+
+    Reorganize icons/images into folders, add photo carousel, career timeline, and credential pop-up
+    
+    - Move all SVG icons into icons/sprite.svg as reusable <symbol> defs,
+      referenced from index.html via <use href="#icon-name"> instead of
+      repeating each icon's markup inline. script.js fetches and inlines
+      the sprite once on load so the references resolve.
+    - Move hero-bg.svg and profile-photo.png into images/, add
+      images/about/ and images/credentials/ with README notes on expected
+      filenames.
+    - Replace the static About-section image block with a real photo
+      carousel (prev/next, dots, autoplay) with placeholder slides ready
+      for real photos at images/about/slide-*.jpg.
+    - Add a new Career & Education section: a work-history timeline built
+      from the CV (KCC Glass, Asahimas Flat Glass roles) with scope +
+      achievement highlights, plus an editable education card. Added to
+      both the top nav and the side scroll-nav (renumbered 01-06).
+    - Turn "View Credential" links into buttons that open a pop-up modal
+      showing the certificate image instead of navigating away, with a
+      placeholder shown until a real image is dropped at the referenced
+      path.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01KruHDcVDTCUwzC7tmgeMen
+
+[33mcommit b663c154883f323318d4c6be1cf14dbe565d6036[m
+Author: rizqi romadhon <rizqi-romadhon@outlook.com>
+Date:   Sat Sep 12 13:51:34 2026 +0700
+
+    change the mail and phone address..
+
+[33mcommit afa29c040289c223c6e730f0d9fde2dee5f8faff[m
+Author: rizqi romadhon <rizqi-romadhon@outlook.com>
+Date:   Sat Sep 12 13:35:37 2026 +0700
+
+    modified website manually
+
+[33mcommit 9596fcbd6f848231a4447349ccd42c85fda4292e[m
+Merge: 3458788 1db3f54
+Author: Rizqi Romadhon <rizqi-romadhon@outlook.com>
+Date:   Thu Sep 10 18:41:02 2026 +0700
+
+    Merge pull request #1 from rizqiro/claude/code-comments-review-nj02mg
+    
+    Add review comments throughout HTML and CSS
+
+[33mcommit 1db3f54720bc8d796a71bf4acb5188fcca321b22[m[33m ([m[1;31morigin/claude/code-comments-review-nj02mg[m[33m)[m
+Author: Claude <noreply@anthropic.com>
+Date:   Thu Sep 10 11:16:51 2026 +0000
+
+    Add review comments throughout HTML and CSS
+    
+    - index.html: add a top-of-file map of sections, and per-section
+      comments explaining what each block does and which values are
+      placeholders to edit (logo initials, resume link, social URLs,
+      email/phone/location, stat cards, credential/project card
+      patterns, footer copyright).
+    - styles.css: add clear banner comments before each major section
+      (Buttons, Navbar, Hero, About, Credentials, Projects, Contact,
+      Footer) so the stylesheet is easy to navigate, plus a note on the
+      :root color variables.
+    - Fix an accidental duplicate <script> tag introduced while editing.
+    
+    Goal: make it easy to review the code and self-edit content/styles
+    without needing to trace through the whole file first.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01F2GXTUHXdcJDccQnqM8ivX
+
+[33mcommit 34587887ec9e1e5b86d53b6f7781f7e131e4a9e2[m
+Author: Rizqi Romadhon <rizqi-romadhon@outlook.com>
+Date:   Thu Sep 10 13:39:59 2026 +0700
+
+    change extension of profile photo from jpg to png
+
+[33mcommit 396b1468818ca960059832ed2612a032f1ae4bc8[m
+Author: Rizqi Romadhon <rizqi-romadhon@outlook.com>
+Date:   Thu Sep 10 13:38:34 2026 +0700
+
+    Rename profile-photo.jpg.png to profile-photo.png
+
+[33mcommit fff481a4b65e7b66bdc70781af2361d700783a56[m
+Author: Rizqi Romadhon <rizqi-romadhon@outlook.com>
+Date:   Thu Sep 10 13:37:45 2026 +0700
+
+    Add files via upload
+
+[33mcommit e8ac79fd0b67536a7fca9202a884242afcc3554f[m
+Author: Claude <noreply@anthropic.com>
+Date:   Thu Sep 10 05:47:37 2026 +0000
+
+    Restore photo hero, move blueprint to a full-section background texture
+    
+    Removes the standalone gear-drawing hero graphic. The Home section is
+    back to a photo-led two-column intro (name/tagline/bio left, portrait
+    right), matching the reference layout: a soft indigo/cyan glow halo
+    peeks from behind the portrait box's top-right and bottom-left corners
+    (.portrait-glow, now a sibling of the box so it works with any photo
+    rather than needing a background-removed cutout), and the "FOCUSED ON"
+    card floats over the box's bottom-right corner again.
+    
+    The blueprint identity moves to a new full-bleed background layer
+    behind the whole hero section (.hero-section::before/::after in
+    styles.css): a generated SVG grid + ghost gear (hero-bg.svg) at ~16%
+    opacity under a dark gradient, so it reads as texture behind the photo
+    and text rather than a competing graphic.
+    
+    Photo sourcing note: stock-photo CDNs (Unsplash, Pexels, Pixabay,
+    FreeImages) are all blocked by this session's egress policy, and the
+    three reference photos shared in chat aren't accessible as files here
+    (unlike an uploaded attachment) -- so the background image is an
+    original generated SVG rather than a stock photo, and the hero photo
+    is wired up as profile-photo.jpg for the user to drop in directly.
+    
+    Also removes blueprint.svg and tools/gen_blueprint.py (the interactive
+    gear-drawing generator from the previous design), and reverts the
+    About section's photo panel back to decorative-only now that the hero
+    carries the real portrait.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_018k7xFHzrBWR8RnpW71uZYQ
+
+[33mcommit 511c010fff0719e02c81ad790c6317951d61e546[m
+Author: Claude <noreply@anthropic.com>
+Date:   Thu Sep 10 05:09:42 2026 +0000
+
+    Replace the interactive hero with a static blueprint image
+    
+    The hero is now a plain <img> pointing at blueprint.svg, so it can be
+    swapped for any drawing (.svg/.png/.jpg) by editing one attribute. All
+    of the parametric slider UI and its JavaScript are gone; script.js is
+    down to the scroll-nav alone.
+    
+    blueprint.svg is an original engineering sheet drawn in the site's
+    palette (navy sheet, sky/indigo accents) rather than stock azure, so it
+    blends with the dark theme: spur-gear front view, sectioned side view
+    with hatching, dimension lines, gear-data/notes/finish blocks and a
+    title block. The gear data is internally consistent (m10 Z14 -> pitch
+    140, tip 160, face 60) so it survives an engineer's glance. It is sized
+    and weighted for the ~450px hero slot rather than for print, so the type
+    stays legible instead of turning to grey mush.
+    
+    Also in this change:
+    - The "Focused on" card moves below the image (as a two-column card)
+      instead of floating over it and hiding the gear.
+    - your-photo.jpg has a home again: it fills the About section's panel,
+      falling back to the decorative panel when absent.
+    - tools/gen_blueprint.py is kept as an optional generator for anyone who
+      would rather regenerate the sheet than hand-edit the SVG.
+    
+    Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_018k7xFHzrBWR8RnpW71uZYQ
+
+[33mcommit d4a34a13b1bba4659a09f165c628a4904e1cf768[m
+Author: Claude <noreply@anthropic.com>
+Date:   Thu Sep 10 04:36:28 2026 +0000
+
+    Replace 3D gear scene with an interactive 2D engineering blueprint
+    
+    Swap the Three.js/WebGL hero graphic for a plain 2D SVG technical
+    drawing in the style of a real gear engineering drawing: a front view
+    and a sectioned side view, dimension lines, hatched cross-section, and
+    a title block, on a blueprint-blue sheet.
+    
+    It's genuinely parametric, not just a static picture: three sliders
+    (Teeth, Diameter, Bore) redraw the whole SVG live, including the title
+    block's numbers, via renderBlueprint()'s render() in script.js. The
+    sheet also tilts toward the cursor for a drafting-table feel. Three.js
+    is no longer loaded at all, so the hero no longer needs WebGL.
+    
+    Also fixes two layout bugs surfaced while testing this:
+    - The bore dimension label ran off the right edge of the drawing at
+      high bore values; moved it to a second line under the diameter
+      label instead of a diagonal leader with no room to grow.
+    - The '.hero' grid never collapsed to one column on narrow screens
+      (a gap in the original template), which badly overflowed once the
+      hero visual grew taller with the new controls panel. Added the
+      missing mobile breakpoint.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_018k7xFHzrBWR8RnpW71uZYQ
+
+[33mcommit abda7ed0b1b929d0743c57351fd96f7a277f1013[m
+Author: Claude <noreply@anthropic.com>
+Date:   Thu Sep 10 04:13:45 2026 +0000
+
+    Reframe the site for mechatronics/production engineering, not software
+    
+    Replace the wireframe icosahedron hero graphic with a small mechanical/
+    electrical 'blueprint': two gears that actually mesh (opposite rotation,
+    speed ratio matching their tooth counts, like a real gear train), a
+    wired ring of control/sensor nodes for the electrical side, and a
+    technical-drawing grid backdrop. Mouse parallax is kept.
+    
+    Rewrite the copy, focus areas, About stat cards, Credentials, and
+    Projects away from web-dev framing (AWS/Meta/Google UX certs, Next.js/
+    React/MongoDB projects) toward mechatronics and production engineering:
+    CAD, PLC/automation, Lean Six Sigma, robotic arm and CNC retrofit
+    projects, etc. Also shifts the hero portrait's accent gradient from
+    purple to a blueprint navy/cyan to match the new graphic.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_018k7xFHzrBWR8RnpW71uZYQ
+
+[33mcommit 219b9f89a8b21d38c10a9d2bc22b7ae6702afc65[m
+Author: Claude <noreply@anthropic.com>
+Date:   Thu Sep 10 03:07:45 2026 +0000
+
+    Make the side scroll-nav's colors theme-aware, not fixed
+    
+    The active label was hardcoded to color: #fff, which disappeared over
+    the light About section background. Sections now opt into a light
+    background via data-theme="light", and initScrollNav() reads the
+    current section's theme to toggle .on-light on .scroll-nav, swapping in
+    dark-on-light text/dot/rail colors as the visitor scrolls past it.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_018k7xFHzrBWR8RnpW71uZYQ
+
+[33mcommit 0e5649752534048f9cd19b76ce6aa17a23baadb0[m
+Author: Claude <noreply@anthropic.com>
+Date:   Thu Sep 10 02:49:35 2026 +0000
+
+    Revert to a single scrolling page with a techie side scroll-nav
+    
+    Multi-page split is gone: Home/About/Credentials/Projects/Contact are
+    back to being sections on one page (index.html), navigated by anchor
+    links and smooth scrolling, as before the previous change.
+    
+    Adds a fixed, monospace 'HUD' nav on the right edge of the viewport
+    (.scroll-nav) that tracks scroll position with a glowing progress rail
+    and a numbered, blinking-cursor label per section, so visitors can see
+    which section they're on at a glance. Built with IntersectionObserver
+    (script.js: initScrollNav), synced with the top navbar's active state,
+    and hidden on narrow screens.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_018k7xFHzrBWR8RnpW71uZYQ
+
+[33mcommit 762798cf38883ffd55bd4d2edd0d5eee92fc7e13[m
+Author: Claude <noreply@anthropic.com>
+Date:   Thu Sep 10 02:32:25 2026 +0000
+
+    Split single-page portfolio into a real multi-page site
+    
+    Home, About, Credentials, Projects, and Contact are now separate HTML
+    pages (index.html, about.html, credentials.html, projects.html,
+    contact.html) sharing one stylesheet (styles.css) and one script
+    (script.js) instead of same-page scroll anchors. Nav links navigate
+    between real pages, with the current page marked active on each.
+    
+    Also adds a proper Contact page (email/phone/location + socials)
+    replacing the old CTA-only placeholder, and updates the README for the
+    new file layout.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_018k7xFHzrBWR8RnpW71uZYQ
+
+[33mcommit d17c84eb5561167814d3e4190c4c9037dba8c261[m
+Author: Claude <noreply@anthropic.com>
+Date:   Thu Sep 10 01:59:23 2026 +0000
+
+    Replace landing page with portfolio site and add Credentials section
+    
+    Adds a dedicated Certifications & Credentials section to the portfolio
+    so certifications can be listed with issuer, date, credential ID, and a
+    verification link for employers to check. Includes nav wiring with
+    smooth-scroll to each section and a README documenting how to add new
+    credentials.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_018k7xFHzrBWR8RnpW71uZYQ
