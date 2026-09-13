@@ -202,6 +202,13 @@ To add a new one:
    - `credential-meta` – issue date and credential ID.
    - `data-cert-image` on the "View Credential" button – a path under
      `images/credentials/`.
+   - The `.credential-icon`'s `<use href="#icon-...">` – pick (or add) an
+     icon that actually matches the topic rather than reusing whatever
+     was on the block you copied. `icons/sprite.svg` already has a few
+     built for this section specifically (`icon-cad`, `icon-belt`,
+     `icon-promotion`, `icon-flask`, `icon-factory`, `icon-mobile`,
+     `icon-code`) — reuse one if it fits (e.g. `icon-belt` for another
+     Six Sigma belt), or paste a new `<symbol>` if none of them do.
 4. Paste the new block anywhere inside the grid.
 
 ### Clicking "View Credential" opens a pop-up, not a new page
@@ -227,7 +234,7 @@ pressing Escape.
 - Update the name, tagline, bio, stats, timeline, education, and project
   cards to match your own work.
 - Update the social links (`social-btn` anchors) to point to your real
-  GitHub, LinkedIn, Instagram, and email — and update the placeholder
+  Quora, LinkedIn, Instagram, and email — and update the placeholder
   email/phone/location in the Contact section.
 - Add a real `resume.pdf` file next to `index.html` so the "Download
   Resume" button works, or remove the button if you don't want one.
