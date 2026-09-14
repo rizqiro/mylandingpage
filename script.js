@@ -142,7 +142,6 @@ function initCertModal() {
 
   const imageEl = document.getElementById("certModalImage");
   const placeholderEl = document.getElementById("certModalPlaceholder");
-  const hintEl = document.getElementById("certModalHint");
   const titleEl = document.getElementById("certModalTitle");
   const triggers = document.querySelectorAll(".credential-link[data-cert-image]");
   let lastFocused = null;
@@ -150,7 +149,6 @@ function initCertModal() {
   const openModal = (imagePath, title) => {
     lastFocused = document.activeElement;
     titleEl.textContent = title || "";
-    hintEl.textContent = imagePath || "";
 
     // Reset to "loading" state each time, since a previous open may have
     // hidden the <img> after a failed load.
