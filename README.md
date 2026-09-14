@@ -186,6 +186,21 @@ It's built with an `IntersectionObserver`, so no scroll-jank polling. It
 hides below ~900px width to keep mobile layouts uncluttered (the top nav
 links do the same, matching the original design).
 
+## Projects: illustrative placeholders, not real screenshots
+
+Each `.project-thumb` in the **Projects** section is a stylized CSS box
+(plain color + a kicker label, or the small fake "Line OEE Dashboard"
+UI) rather than a real photo or screenshot — useful if, like the
+original author, your actual project outputs are confidential under a
+former employer's policy and you can't publish real images of them.
+
+Right below `.project-grid` sits `.projects-disclaimer`, a small
+bordered note (with the `icon-info` icon) telling visitors exactly
+that: the visuals are illustrations, not real material. If you swap in
+real project photos/screenshots instead, delete that `<p>` (and the
+HTML comment above it) — it only makes sense while the thumbnails are
+placeholders.
+
 ## Adding a certification or credential
 
 The **Credentials** section is built for this. Each certification is one
