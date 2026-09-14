@@ -60,6 +60,28 @@ body {
   flex-shrink: 0;
 }
 
+/* Disclaimer under the project grid -- see the HTML comment above it
+   for why it exists. Small and muted so it reads as a footnote, not
+   a competing headline. */
+.projects-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 24px;
+  padding: 12px 16px;
+  border: 1px solid var(--zinc-800);
+  border-radius: 10px;
+  color: var(--zinc-500);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.projects-disclaimer .icon-sm {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--zinc-500);
+}
+
 /* ===================== BUTTONS ===================== */
 /* Base .btn style, then .btn-pill/.btn-primary/.btn-outline/etc. mix in shape + color variants. */
 .btn {
