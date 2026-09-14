@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Matches the navbar logo: "RR" in white, dot in indigo-light, on a black rounded square. -->
+  <rect width="64" height="64" rx="14" fill="#000000" />
+  <text
+    x="50%"
+    y="53%"
+    dominant-baseline="middle"
+    text-anchor="middle"
+    font-family="Arial, Helvetica, sans-serif"
+    font-weight="800"
+    font-size="30"
+    letter-spacing="-1"
+  >
+    <tspan fill="#ffffff">RR</tspan><tspan fill="#818cf8">.</tspan>
+  </text>
+</svg>
