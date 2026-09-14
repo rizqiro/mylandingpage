@@ -1029,6 +1029,28 @@ body {
   .project-grid { grid-template-columns: 1fr; }
 }
 
+/* Disclaimer under the project grid -- see the HTML comment above it
+   for why it exists. Small and muted so it reads as a footnote, not
+   a competing headline. */
+.projects-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 24px;
+  padding: 12px 16px;
+  border: 1px solid var(--zinc-800);
+  border-radius: 10px;
+  color: var(--zinc-500);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.projects-disclaimer .icon-sm {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--zinc-500);
+}
+
 .project-thumb {
   aspect-ratio: 4/3;
   border-radius: 16px;
